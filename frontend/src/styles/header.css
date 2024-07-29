@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+#header {
+  margin: 0vmax;
+  padding: 1vmax;
+  box-sizing: border-box;
+  display: flex;
+  background-image: linear-gradient(to bottom right, #597ef1, #a4b2df);
+  color: white;
+}
+
+.main {
+  margin-left: 5vmax;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+}
+
+.flex {
+  display: flex;
+}
+
+/* news name */
+.main > h2 {
+  font-size: 2vmax;
+  margin-left: 25vmax;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* left panel */
+.news-group {
+  display: flex;
+  gap: 2vmax;
+}
+.main > h5 {
+  font-size: 0.3vmax;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.lines {
+  width: 1.9vmax;
+  height: 1.9vmax;
+}
+/* end panel */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-container input {
+  padding: 0.5vmax 0.5vmax 0.5vmax 0.5vmax;
+  margin-left: 2.5vmax;
+  font-size: 1vmax;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  width: 10vmax;
+  background-color: rgba(251, 251, 251, 0.6);
+}
+.search {
+  position: absolute;
+  right: 1vmax;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #574541;
+  font-size: 1.2vmax;
+}
+/* languages */
+.dropdown-menu {
+  display: flex;
+  margin-left: 22vmax;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  padding: 2px;
+  outline: none;
+}
+
+#nav {
+  padding: 0.5vmax;
+  margin: 0vmax;
+  box-sizing: border-box;
+  display: flex;
+  background-image: linear-gradient(#eceef5, #dfe0e5);
+  border-bottom:0.5px solid #9299AD;
+}
+
+.news-section {
+  display: flex;
+  margin-left: 5vmax;
+  padding: 0.5vmax;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  gap: 2.5vmax;
+  
+}
+
+.news-section > h3 {
+  font-size:1vmax;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+}

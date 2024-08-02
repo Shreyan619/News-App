@@ -1,4 +1,4 @@
-import { apiResponse } from "./apiResponse"
+import { apiResponse } from "./apiResponse.js"
 
 class errorHandler extends Error {
     constructor(

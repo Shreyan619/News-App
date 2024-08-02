@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import validator from "validator"
+import bcrypt from "bcrypt"
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -20,7 +21,8 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: ["user", "admin"],
+        enum: ["user", "admin"],
+        default: "user"
     },
     refreshToken: {
         type: String,
@@ -33,5 +35,18 @@ const userSchema = new mongoose.Schema({
     resetPasswordExpire: Date,
 
 }, { timestamps: true })
+
+
+userSchema.pre("save", async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 10)
+    }
+    next()
+})
+
+
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password);
+};
 
 export const User = mongoose.model("User", userSchema)

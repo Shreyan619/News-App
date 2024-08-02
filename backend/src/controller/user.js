@@ -4,9 +4,6 @@ import { errorHandler } from "../utils/errorHandler.js"
 import { apiResponse } from "../utils/apiResponse.js";
 import { genAccessToken, genRefreshToken } from "../utils/token.js"
 import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
-
-dotenv.config()
 
 export const refreshAccessToken = asyncHandler(async (req, res) => {
     const { refreshToken } = req.cookies

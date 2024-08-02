@@ -2,9 +2,6 @@ import { User } from "../models/user.model.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken"
-// import dotenv from "dotenv"
-
-// dotenv.config()
 
 export const admin = asyncHandler(async (req, res, next) => {
     if (req.user && req.user.role === 'admin') {

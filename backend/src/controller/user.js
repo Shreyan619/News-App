@@ -14,7 +14,7 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
 
     try {
         const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
-        const user = await User.findById(decoded.id)
+        const user = await User.findById(decoded._id)
 
         if (!user || !user.refreshToken !== refreshToken) {
             throw new errorHandler(403, "invalid refresh token ")

@@ -22,7 +22,7 @@ export const isAuthenticated = asyncHandler(async (req, res, next) => {
         }
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-        req.user = await User.findById(decoded.id).select("-password -refreshToken");
+        req.user = await User.findById(decoded._id)
 
         if (!req.user) {
             throw new errorHandler("User not found", 404);

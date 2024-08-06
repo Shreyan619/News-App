@@ -3,41 +3,46 @@ import mongoose from "mongoose";
 const articleSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        // required: true
     },
     link: {
         type: String,
-        required: true
+        unique: true
     },
     summary: {
         type: String,
-        required: true
+        // required: true
     },
-    content: {
+    description: {
         type: String,
-        required: true
+        // required: true
+    },
+    role: {
+        type: String,
+        enum: ["user", "admin"],
+        default: "admin"
     },
     category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
-        required: true
+        // required: true
     },
     source: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Source',
-        required: true
+        // required: true
     },
     author: {
         type: String,
-        required: true
+        // required: true
     },
     publishedAt: {
         type: Date,
-        required: true
+        // required: true
     },
-    imageUrl: {
+    image: {
         type: String
     },
 }, { timestamps: true })
 
-export const article = mongoose.model("Article", articleSchema)
+export const Article = mongoose.model("Article", articleSchema)

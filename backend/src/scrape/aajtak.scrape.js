@@ -1,16 +1,30 @@
 // hindi news
 
 import puppeteer from "puppeteer";
+import { Article } from "../models/article.model.js"
+import { apiResponse } from "../utils/apiResponse.js";
+import { errorHandler } from "../utils/errorHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const scrapeAajTak = async () => {
+// const saveArticlesToDB = async (articles) => {
+//     try {
+
+//         const savedArticles = await Article.insertMany(articles);
+//         console.log('Article Saved to DB: ', savedArticles)
+//     } catch (error) {
+//         console.error('Error saving articles to the database:', error);
+//     }
+// }
+
+export const scrapeAajTak = asyncHandler(async (req, res) => {
     try {
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             defaultViewport: null
         });
 
         const page = await browser.newPage();
-        page.setDefaultNavigationTimeout(0);
+        await page.setDefaultNavigationTimeout(0);
         await page.goto('https://www.aajtak.in/', { waitUntil: 'networkidle2' });
 
         const containerSelector = "#badi_khabar_1";
@@ -75,7 +89,7 @@ export const scrapeAajTak = async () => {
 
         const scrapedData = []
 
-        console.log(`Waiting for selector: ${containerSelector}`);
+        // console.log(`Waiting for selector: ${containerSelector}`);
         await page.waitForSelector(containerSelector, { timeout: 2000 });
 
         const articles = await page.$$(containerSelector);
@@ -102,14 +116,28 @@ export const scrapeAajTak = async () => {
 
 
                     if (articleTitle || articleLink || articleImage || articleDescription) {
-                        scrapedData.push({
+                        const articleData = {
                             title: articleTitle,
                             link: articleLink,
                             description: articleDescription,
                             image: articleImage,
-                        });
-                    }
+                        };
 
+
+                        const existingArticle = await Article.findOne({ link: articleData.link })
+
+                        if (!existingArticle) {
+
+                            const newArticle = new Article(articleData)
+                            await newArticle.save()
+                            scrapedData.push(articleData)
+
+                        } else {
+
+                            console.log(`Article already exists: ${articleData.link}`);
+
+                        }
+                    }
                 } catch (innerError) {
                     console.error("Error evaluating element:", innerError);
                 }
@@ -118,11 +146,12 @@ export const scrapeAajTak = async () => {
 
         // console.log(scrapedData);
         await browser.close();
+        res.status(200)
+            .json(new apiResponse(201, "Articles scraped and saved successfully"))
 
     } catch (error) {
         console.error("Error during scraping:", error);
+        throw new errorHandler(501, "Error during scraping")
     }
-};
+});
 
-
-scrapeAajTak();

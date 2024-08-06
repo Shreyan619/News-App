@@ -1,8 +1,8 @@
-// spanish news
+// english newshttps://abcnews.go.com/Live
 
 import puppeteer from "puppeteer";
 
-export const scrapeEl = async () => {
+export const scrapeEnglish = async () => {
     try {
         const browser = await puppeteer.launch({
             headless: false,
@@ -11,43 +11,39 @@ export const scrapeEl = async () => {
 
         const page = await browser.newPage();
         page.setDefaultNavigationTimeout(0);
-        await page.goto('https://elpais.com/us/?ed=us', { waitUntil: 'networkidle2' });
+        await page.goto('https://abcnews.go.com/Live', { waitUntil: 'networkidle2' });
 
-        const containerSelector = "body > main > div.z.z-hi";
+        const containerSelector = "#bandlist-component > div:nth-child(3)"
 
         const selectors = [
             {
-                title: "header > h2",
-                link: "figure > a",
-                image: "figure > a > img",
-                description: "article > p"
+                title: "li:nth-child(2) > a > h3 > span",
+                link: "li:nth-child(2) > a",
+                image: "li:nth-child(2) > a > div > figure > div.Image__Wrapper.aspect-ratio--child > img",
+
             },
             {
-                title: "article:nth-child(1) > header > h2",
-                link: "article:nth-child(1) > header > h2 > a",
-                image: "",
-                description: "article:nth-child(1) > p"
+                title: "li:nth-child(3) > a > h3 > span",
+                link: "li:nth-child(3) > a",
+                image: "li:nth-child(3) > a > div > figure > div.Image__Wrapper.aspect-ratio--child > img",
+
             },
             {
-                title: "li:nth-child(1) > a",
-                link: "article.c.c-d.c--m > header > h2 > a",
-                image: "article.c.c-d.c--m > figure > a > img",
-                // description: ""
+                title: "li:nth-child(4) > a > h3 > span",
+                link: "li:nth-child(4) > a",
+                image: "li:nth-child(4) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
+
             },
-            {
-                title: "article.c.c-d.c--m-n > header > h2",
-                link: "article.c.c-d.c--m-n > header > h2 > a",
-                // image: "",
-                // description: " article.c.c-d.c--m-n > ul > li > a > span"
-            },
-           
+
+
+
 
         ];
 
         const scrapedData = []
 
         console.log(`Waiting for selector: ${containerSelector}`);
-        await page.waitForSelector(containerSelector, { timeout: 3000 });
+        await page.waitForSelector(containerSelector, { timeout: 10000 });
 
         const articles = await page.$$(containerSelector);
 
@@ -95,4 +91,4 @@ export const scrapeEl = async () => {
 };
 
 
-scrapeEl();
+scrapeEnglish();

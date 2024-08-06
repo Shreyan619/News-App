@@ -1,8 +1,8 @@
-// spanish news
+// french news https://www.france24.com/fr/
 
 import puppeteer from "puppeteer";
 
-export const scrapeEl = async () => {
+export const scrapeFrance = async () => {
     try {
         const browser = await puppeteer.launch({
             headless: false,
@@ -11,43 +11,56 @@ export const scrapeEl = async () => {
 
         const page = await browser.newPage();
         page.setDefaultNavigationTimeout(0);
-        await page.goto('https://elpais.com/us/?ed=us', { waitUntil: 'networkidle2' });
+        await page.goto('https://www.france24.com/fr/', { waitUntil: 'networkidle2' });
 
-        const containerSelector = "body > main > div.z.z-hi";
+        const containerSelector = "#main-content > div:nth-child(2) > div";
 
         const selectors = [
             {
-                title: "header > h2",
-                link: "figure > a",
-                image: "figure > a > img",
-                description: "article > p"
+                title: "div.article__title > a > h2",
+                link: "div.article__title > a",
+                image: "figure > picture > img",
+
             },
             {
-                title: "article:nth-child(1) > header > h2",
-                link: "article:nth-child(1) > header > h2 > a",
-                image: "",
-                description: "article:nth-child(1) > p"
+                title: "div:nth-child(2) > div > div > div > div.article__title > a > h2",
+                link: "div:nth-child(2) > div > div > div > div.article__title > a",
+                image: "div:nth-child(2) > div > div > a > figure > picture > img",
+
             },
             {
-                title: "li:nth-child(1) > a",
-                link: "article.c.c-d.c--m > header > h2 > a",
-                image: "article.c.c-d.c--m > figure > a > img",
-                // description: ""
+                title: "div:nth-child(3) > div > div > div > div.article__title > a > h2",
+                link: "div:nth-child(3) > div > div > div > div.article__title > a",
+                image: "div:nth-child(3) > div > div > a > figure > picture > img",
+
             },
             {
-                title: "article.c.c-d.c--m-n > header > h2",
-                link: "article.c.c-d.c--m-n > header > h2 > a",
-                // image: "",
-                // description: " article.c.c-d.c--m-n > ul > li > a > span"
+                title: "div:nth-child(4) > div > div > div > div.article__title > a > h2",
+                link: "div:nth-child(4) > div > div > div > div.article__title > a",
+                image: "div:nth-child(4) > div > div > a > figure > picture > img",
+
             },
-           
+            {
+                title: "div:nth-child(5) > div > div > div > div.article__title > a > h2",
+                link: "div:nth-child(5) > div > div > div > div.article__title > a",
+                image: "#div:nth-child(5) > div > div > a > figure > picture > img",
+
+            },
+            {
+                title: "div:nth-child(6) > div > div > div > div.article__title > a > h2",
+                link: "div:nth-child(6) > div > div > div > div.article__title > a",
+                image: "div:nth-child(6) > div > div > a > figure > picture > img",
+
+            },
+
+
 
         ];
 
         const scrapedData = []
 
         console.log(`Waiting for selector: ${containerSelector}`);
-        await page.waitForSelector(containerSelector, { timeout: 3000 });
+        await page.waitForSelector(containerSelector, { timeout: 4000 });
 
         const articles = await page.$$(containerSelector);
 
@@ -95,4 +108,4 @@ export const scrapeEl = async () => {
 };
 
 
-scrapeEl();
+scrapeFrance();

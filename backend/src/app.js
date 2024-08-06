@@ -4,15 +4,17 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import user from "./routes/user.routes.js";
 import { scrapeAajTak } from "./scrape/aajtak.acrape.js";
-import {scrapeEl} from "./scrape/el.scrape.js"
+import { scrapeEl } from "./scrape/el.scrape.js"
+import { scrapeFrance } from "./scrape/france24.scrape.js"
+import {scrapeEnglish} from "./scrape/english.scrape.js"
 
 const app = express()
 dotenv.config()
 
 app.use(cors({
-    origin: `https://${process.env.HOST}`,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+  origin: `https://${process.env.HOST}`,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }))
 
 // app.get("/scrapeAaj", async (req, res) => {
@@ -39,7 +41,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }))
 app.use(cookieParser())
 
 // routes declaration
-app.use("/api/v1",user)
+app.use("/api/v1", user)
 
 
 export { app }

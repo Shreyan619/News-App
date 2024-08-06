@@ -76,7 +76,7 @@ export const scrapeAajTak = async () => {
         const scrapedData = []
 
         console.log(`Waiting for selector: ${containerSelector}`);
-        await page.waitForSelector(containerSelector, { timeout: 10000 });
+        await page.waitForSelector(containerSelector, { timeout: 2000 });
 
         const articles = await page.$$(containerSelector);
 

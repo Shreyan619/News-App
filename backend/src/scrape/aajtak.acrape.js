@@ -1,6 +1,8 @@
+// hindi news
+
 import puppeteer from "puppeteer";
 
-export const scrapeArticles = async () => {
+export const scrapeAajTak = async () => {
     try {
         const browser = await puppeteer.launch({
             headless: false,
@@ -114,12 +116,13 @@ export const scrapeArticles = async () => {
             }
         }
 
-        console.log(scrapedData);
+        // console.log(scrapedData);
         await browser.close();
+
     } catch (error) {
         console.error("Error during scraping:", error);
     }
 };
 
 
-scrapeArticles();
+scrapeAajTak();

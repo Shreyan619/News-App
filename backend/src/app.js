@@ -3,7 +3,8 @@ import dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import user from "./routes/user.routes.js";
-import { scrapeArticles } from "./scrape/puppeteer.js";
+import { scrapeAajTak } from "./scrape/aajtak.acrape.js";
+import {scrapeEl} from "./scrape/el.scrape.js"
 
 const app = express()
 dotenv.config()
@@ -14,15 +15,24 @@ app.use(cors({
     credentials: true
 }))
 
-app.get("/scrape", async (req, res) => {
-    try {
-      await scrapeArticles();
-      res.send("Scraping completed");
-    } catch (error) {
-      console.error("Error during scraping:", error);
-      res.status(500).send("Scraping failed");
-    }
-  });
+// app.get("/scrapeAaj", async (req, res) => {
+//     try {
+//       await scrapeAajTak();
+//       res.send("Scraping completed");
+//     } catch (error) {
+//       console.error("Error during scraping:", error);
+//       res.status(500).send("Scraping failed");
+//     }
+//   });
+// app.get("/scrapeEl", async (req, res) => {
+//     try {
+//       await scrapeEl();
+//       res.send("Scraping completed");
+//     } catch (error) {
+//       console.error("Error during scraping:", error);
+//       res.status(500).send("Scraping failed");
+//     }
+//   });
 
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true, limit: "10mb" }))

@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { connectDb } from "./src/DB/Db.js"
 import { app } from "./src/app.js"
+import "./src/scrape/scrapeClean.js"
 
 dotenv.config()
 

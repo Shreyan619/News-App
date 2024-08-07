@@ -5,19 +5,8 @@ import { apiResponse } from "../utils/apiResponse.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { spanishArticle } from "../models/spanish.model.js"
-import cron from "node-cron"
 
-// delete old articles
-const deleteOld = asyncHandler(async (req, res) => {
-    try {
-        const cutOffDate = new Date(Date.now() - 10 * 60 * 1000)
 
-        Article.deleteMany({ createdAt: { $lt: cutOffDate } })
-        console.log("old articles deleted")
-    } catch (error) {
-        throw new errorHandler(500, "Error deleting old articles :", error)
-    }
-})
 
 export const scrapeEl = asyncHandler(async (req, res) => {
     try {
@@ -129,8 +118,3 @@ export const scrapeEl = asyncHandler(async (req, res) => {
 });
 
 
-cron.schedule("*/5 * * * *", async () => {
-    console.log('Running scheduled task for scraping and cleaning')
-    await deleteOldArticles();
-    await scrapeEl();
-})

@@ -5,21 +5,10 @@ import { apiResponse } from "../utils/apiResponse.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { frenchArticle } from "../models/french.model.js"
-import cron from "node-cron"
 
-// delete old articles
-const deleteOld = asyncHandler(async (req, res) => {
-    try {
-        const cutOffDate = new Date(Date.now() - 10 * 60 * 1000)
 
-        Article.deleteMany({ createdAt: { $lt: cutOffDate } })
-        console.log("old articles deleted")
-    } catch (error) {
-        throw new errorHandler(500, "Error deleting old articles :", error)
-    }
-})
 
-export const scrapeFrance = async () => {
+export const scrapeFrance = asyncHandler(async () => {
     try {
         const browser = await puppeteer.launch({
             headless: true,
@@ -140,11 +129,7 @@ export const scrapeFrance = async () => {
         console.error("Error during scraping:", error);
         throw new errorHandler(501, "Error during scraping")
     }
-};
+});
 
-cron.schedule("*/5 * * * *", async () => {
-    console.log('Running scheduled task for scraping and cleaning')
-    await deleteOldArticles();
-    await scrapeFrance();
-})
+
 

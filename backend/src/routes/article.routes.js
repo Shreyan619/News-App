@@ -4,6 +4,7 @@ import { apiResponse } from "../utils/apiResponse.js"
 import { scrapeEl } from "../scrape/el.scrape.js"
 import { scrapeFrance } from "../scrape/france24.scrape.js"
 import { scrapeEnglish } from "../scrape/english.scrape.js"
+import { getAllArticles } from "../controller/article.js"
 
 const article = Router()
 
@@ -34,6 +35,8 @@ article.get("/article/english", async (req, res) => {
     res.status(500)
         .json(new apiResponse(201, "English Articles scraped and saved successfully", result))
 })
+
+article.get("/article",getAllArticles)
 
 
 export default article

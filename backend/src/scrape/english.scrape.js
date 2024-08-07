@@ -1,11 +1,27 @@
 // english newshttps://abcnews.go.com/Live
 
 import puppeteer from "puppeteer";
+import { apiResponse } from "../utils/apiResponse.js";
+import { errorHandler } from "../utils/errorHandler.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { englishArticle } from "../models/english.model.js";
+import cron from "node-cron"
+
+const deleteOld = asyncHandler(async (req, res) => {
+    try {
+        const cutOffDate = new Date(Date.now() - 10 * 60 * 1000)
+
+        Article.deleteMany({ createdAt: { $lt: cutOffDate } })
+        console.log("old articles deleted")
+    } catch (error) {
+        throw new errorHandler(500, "Error deleting old articles :", error)
+    }
+})
 
 export const scrapeEnglish = async () => {
     try {
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             defaultViewport: null
         });
 
@@ -42,7 +58,7 @@ export const scrapeEnglish = async () => {
 
         const scrapedData = []
 
-        console.log(`Waiting for selector: ${containerSelector}`);
+        // console.log(`Waiting for selector: ${containerSelector}`);
         await page.waitForSelector(containerSelector, { timeout: 10000 });
 
         const articles = await page.$$(containerSelector);
@@ -69,12 +85,26 @@ export const scrapeEnglish = async () => {
 
 
                     if (articleTitle || articleLink || articleImage || articleDescription) {
-                        scrapedData.push({
+                        const articleData = {
                             title: articleTitle,
                             link: articleLink,
                             description: articleDescription,
                             image: articleImage,
-                        });
+                        };
+
+                        const existingArticle = await englishArticle.findOne({ link: articleData.link })
+
+                        if (!existingArticle) {
+
+                            const newArticle = new englishArticle(articleData)
+                            await newArticle.save()
+                            scrapedData.push(articleData)
+
+                        } else {
+
+                            console.log(`Article already exists: ${articleData.link}`);
+
+                        }
                     }
 
                 } catch (innerError) {
@@ -85,10 +115,17 @@ export const scrapeEnglish = async () => {
 
         // console.log(scrapedData);
         await browser.close();
+        return scrapedData
+
     } catch (error) {
         console.error("Error during scraping:", error);
+        throw new errorHandler(501, "Error during scraping")
     }
 };
 
 
-scrapeEnglish();
+cron.schedule("*/5 * * * *", async () => {
+    console.log('Running scheduled task for scraping and cleaning')
+    await deleteOldArticles();
+    await scrapeFrance();
+})

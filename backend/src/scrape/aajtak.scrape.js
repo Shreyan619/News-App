@@ -1,20 +1,23 @@
 // hindi news
 
 import puppeteer from "puppeteer";
-import { Article } from "../models/article.model.js"
+import { hindiArticle } from "../models/hindi.model.js"
 import { apiResponse } from "../utils/apiResponse.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import cron from "node-cron"
 
-// const saveArticlesToDB = async (articles) => {
-//     try {
+// delete old articles
+const deleteOld = asyncHandler(async (req, res) => {
+    try {
+        const cutOffDate = new Date(Date.now() - 10 * 60 * 1000)
 
-//         const savedArticles = await Article.insertMany(articles);
-//         console.log('Article Saved to DB: ', savedArticles)
-//     } catch (error) {
-//         console.error('Error saving articles to the database:', error);
-//     }
-// }
+        Article.deleteMany({ createdAt: { $lt: cutOffDate } })
+        console.log("old articles deleted")
+    } catch (error) {
+        throw new errorHandler(500, "Error deleting old articles :", error)
+    }
+})
 
 export const scrapeAajTak = asyncHandler(async (req, res) => {
     try {
@@ -124,11 +127,11 @@ export const scrapeAajTak = asyncHandler(async (req, res) => {
                         };
 
 
-                        const existingArticle = await Article.findOne({ link: articleData.link })
+                        const existingArticle = await hindiArticle.findOne({ link: articleData.link })
 
                         if (!existingArticle) {
 
-                            const newArticle = new Article(articleData)
+                            const newArticle = new hindiArticle(articleData)
                             await newArticle.save()
                             scrapedData.push(articleData)
 
@@ -146,12 +149,17 @@ export const scrapeAajTak = asyncHandler(async (req, res) => {
 
         // console.log(scrapedData);
         await browser.close();
-        res.status(200)
-            .json(new apiResponse(201, "Articles scraped and saved successfully"))
+        return scrapedData
 
     } catch (error) {
         console.error("Error during scraping:", error);
         throw new errorHandler(501, "Error during scraping")
     }
 });
+
+cron.schedule("*/5 * * * *", async () => {
+    console.log('Running scheduled task for scraping and cleaning')
+    await deleteOldArticles();
+    await scrapeAajTak();
+})
 

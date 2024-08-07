@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const articleSchema = new mongoose.Schema({
+const frenchArticleSchema = new mongoose.Schema({
     title: {
         type: String,
         // required: true
@@ -45,4 +45,4 @@ const articleSchema = new mongoose.Schema({
     },
 }, { timestamps: true })
 
-export const Article = mongoose.model("Article", articleSchema)
+export const frenchArticle = mongoose.model("Frencharticle", frenchArticleSchema)

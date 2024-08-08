@@ -12,40 +12,29 @@ import { errorHandler } from "../utils/errorHandler.js"
 import { bookmark } from "../models/bookmark.model.js"
 
 
+
 // delete old articles
-const deleteOldArticles = asyncHandler(async (req, res) => {
+const deleteOldArticles = async (req, res) => {
+
+
     try {
         const cutOffDate = new Date(Date.now() - 10 * 60 * 1000)
 
-        await englishArticle.deleteMany({ createdAt: { $lt: cutOffDate } }).session(session)
-        await spanishArticle.deleteMany({ createdAt: { $lt: cutOffDate } }).session(session)
-        await frenchArticle.deleteMany({ createdAt: { $lt: cutOffDate } }).session(session)
-        await hindiArticle.deleteMany({ createdAt: { $lt: cutOffDate } }).session(session)
+        await englishArticle.deleteMany({ createdAt: { $lt: cutOffDate } })
+        await spanishArticle.deleteMany({ createdAt: { $lt: cutOffDate } })
+        await frenchArticle.deleteMany({ createdAt: { $lt: cutOffDate } })
+        await hindiArticle.deleteMany({ createdAt: { $lt: cutOffDate } })
 
+       
 
         console.log("old articles deleted")
     } catch (error) {
-        throw new errorHandler(500, "Error deleting old articles :", error)
+
+        
+        console.error(error.message)
+        throw new errorHandler(500, "Error deleting old articles :", error.message)
     }
-})
-
-// const cleanUpInvalidBookmarks = asyncHandler(async () => {
-//     try {
-//         const articleModels = [englishArticle, spanishArticle, frenchArticle, hindiArticle];
-
-//         // Iterate over all article models
-//         for (const model of articleModels) {
-//             const validArticleIds = await model.find().distinct('_id');
-//             await bookmark.deleteMany({
-//                 articleId: { $nin: validArticleIds }
-//             });
-//         }
-
-//         console.log('Invalid bookmarks cleaned up successfully');
-//     } catch (error) {
-//         console.error('Error during bookmarks cleanup:', error);
-//     }
-// })
+}
 
 cron.schedule("*/5 * * * *", async () => {
     console.log('Running scheduled task for scraping and cleaning')

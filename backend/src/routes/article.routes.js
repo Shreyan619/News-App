@@ -5,9 +5,11 @@ import { scrapeEl } from "../scrape/el.scrape.js"
 import { scrapeFrance } from "../scrape/france24.scrape.js"
 import { scrapeEnglish } from "../scrape/english.scrape.js"
 import {
+    comments,
     getAllArticles,
     search
 } from "../controller/article.js"
+import { isAuthenticated } from "../middleware/auth.js"
 
 const article = Router()
 
@@ -41,6 +43,7 @@ article.get("/article/english", async (req, res) => {
 
 article.get("/article", getAllArticles)
 article.get("/search", search)
+article.post("/article/:articleId/user/:userId/comments", isAuthenticated, comments)
 
 
 export default article

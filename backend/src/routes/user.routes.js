@@ -16,8 +16,8 @@ user.post("/user/create", createUser)
 user.post("/user/login", loginUser)
 // user.post("/user/refreshtoken", refreshAccessToken)
 user.get("/user/logout", isAuthenticated, logoutUser)
-user.post("/user/bookmark", isAuthenticated, bookmarkArticle)
-user.delete("/user/bookmark/remove", isAuthenticated, removeBookmark)
+user.post("/article/:articleId/user/bookmark", isAuthenticated, bookmarkArticle)
+user.delete("/article/:articleId/user/bookmark/remove", isAuthenticated, removeBookmark)
 user.get("/user/bookmarks", isAuthenticated, getAllBookmark)
 
 export default user

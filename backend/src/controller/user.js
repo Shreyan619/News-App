@@ -9,6 +9,7 @@ import { spanishArticle } from "../models/spanish.model.js"
 import { frenchArticle } from "../models/french.model.js"
 import { hindiArticle } from "../models/hindi.model.js"
 import jwt from "jsonwebtoken"
+import mongoose from "mongoose";
 
 const articleModels = {
     Englisharticle: englishArticle,
@@ -154,63 +155,83 @@ export const logoutUser = asyncHandler(async (req, res) => {
 })
 
 export const bookmarkArticle = asyncHandler(async (req, res) => {
-    const { articleId, articlemodel } = req.body
+    try {
+        const { articleId } = req.params;
+        const { articlemodel } = req.body;
 
-    if (!articleId || !articlemodel) {
-        throw new errorHandler(400, "aricleid and language required")
+        if (!articleId || !articlemodel) {
+            throw new errorHandler(400, "Article ID and article model are required");
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(articleId)) {
+            throw new errorHandler(400, "Invalid article ID format.");
+        }
+
+        const user = req.user._id;
+
+        const articleModel = articleModels[articlemodel];
+        // console.log(articleModel)
+
+        if (!articleModel) {
+            throw new errorHandler(400, "Invalid article model");
+        }
+
+        const articleExist = await articleModel.findById(articleId);
+        if (!articleExist) {
+            throw new errorHandler(404, "Article not found");
+        }
+
+        const existingBookmark = await bookmark.findOne({ userId: user, articleId, articlemodel });
+
+        if (existingBookmark) {
+            throw new errorHandler(400, "Article is already bookmarked");
+        }
+
+        const newBookmark = new bookmark({
+            userId: user,
+            articleId,
+            articlemodel,
+            title: articleExist.title,
+            image: articleExist.image,
+            link: articleExist.link
+        });
+
+        await newBookmark.save();
+
+        return res.status(201)
+            .json(new apiResponse(201, "Article bookmarked successfully", newBookmark));
+    } catch (error) {
+        console.error("Error in bookmarkArticle:", error);
+        throw new errorHandler(500, "Error bookmarking article", error.message);
     }
-
-    const user = req.user._id
-    const articleModel = articleModels[articlemodel]
-
-    if (!articleModel) {
-        throw new errorHandler(400, 'Invalid article model');
-    }
-
-    const articleExist = await articleModel.findById(articleId)
-    if (!articleExist) {
-        throw new errorHandler(404, 'Article not found');
-    }
-
-    const existingBookmark = await bookmark.findOne({ userId: user, articleId, articlemodel })
-
-    if (existingBookmark) {
-        throw new errorHandler(400, 'Article is already bookmarked');
-    }
-
-    const newBoomark = new bookmark({
-        userId: user,
-        articleId,
-        articlemodel,
-        title: articleExist.title,
-        image: articleExist.image,
-        link: articleExist.link,
-        image: articleExist.image,
-    })
-
-    await newBoomark.save()
-
-    return res.status(201)
-        .json(new apiResponse(201, "Article bookmarked successfully"))
-})
+});
 
 export const removeBookmark = asyncHandler(async (req, res) => {
-    const { articleId, articlemodel } = req.body;
-    const userId = req.user._id;
+    try {
+        const { articleId } = req.params
+        const { articlemodel } = req.body;
+        const userId = req.user._id;
 
-    if (!articleId || !articlemodel) {
-        throw new errorHandler(400, "ArticleId and language required");
+        if (!articleId || !articlemodel) {
+            throw new errorHandler(400, "ArticleId required");
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(articleId)) {
+            throw new errorHandler(400, "Invalid article ID format.");
+        }
+        const existingBookmark = await bookmark.findOne({ userId, articleId, articlemodel });
+        if (!existingBookmark) {
+            throw new errorHandler(404, 'Bookmark not found');
+        }
+
+        await bookmark.deleteOne({ userId, articleId, articlemodel })
+
+        return res.status(200)
+            .json(new apiResponse(200, "Bookmark removed successfully"))
+    } catch (error) {
+        console.error(error.message)
+        throw new errorHandler(501, "error removing bookmark", error.message)
     }
-
-    const existingBookmark = await bookmark.findOne({ userId, articleId, articlemodel });
-    if (!existingBookmark) {
-        throw new errorHandler(404, 'Bookmark not found');
-    }
-
-    await bookmark.deleteOne({ userId, articleId, articlemodel })
-
-    return res.status(200)
-        .json(new apiResponse(200, "Bookmark removed successfully"))
 })
 
 export const getAllBookmark = asyncHandler(async (req, res) => {

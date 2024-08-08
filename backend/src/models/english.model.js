@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { comment } from "./comment.model.js";
 
 const englishArticleSchema = new mongoose.Schema({
     title: {
@@ -9,9 +10,9 @@ const englishArticleSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    summary: {
-        type: String,
-        // required: true
+    comment:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Comment"
     },
     description: {
         type: String,

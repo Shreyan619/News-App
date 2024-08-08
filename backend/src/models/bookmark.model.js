@@ -8,7 +8,6 @@ const bookmarkSchema = new mongoose.Schema({
     },
     articleId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
     },
     articlemodel: {
         type: String,

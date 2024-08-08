@@ -9,9 +9,9 @@ const hindiArticleSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    summary: {
-        type: String,
-        // required: true
+    comment:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Comment"
     },
     description: {
         type: String,

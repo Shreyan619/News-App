@@ -181,7 +181,11 @@ export const bookmarkArticle = asyncHandler(async (req, res) => {
     const newBoomark = new bookmark({
         userId: user,
         articleId,
-        articlemodel
+        articlemodel,
+        title: articleExist.title,
+        image: articleExist.image,
+        link: articleExist.link,
+        image: articleExist.image,
     })
 
     await newBoomark.save()

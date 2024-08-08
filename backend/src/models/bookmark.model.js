@@ -14,6 +14,18 @@ const bookmarkSchema = new mongoose.Schema({
         type: String,
         enum: ["Englisharticle", "Spanisharticle", "Frencharticle", "Hindiarticle"],
         required: true
+    },
+    title: {
+        type: String
+    },
+    link: {
+        type: String
+    },
+    image: {
+        type: String
+    },
+    description: {
+        type: String
     }
 }, { timestamps: true });
 

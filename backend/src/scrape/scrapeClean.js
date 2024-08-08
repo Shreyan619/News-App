@@ -29,23 +29,23 @@ const deleteOldArticles = asyncHandler(async (req, res) => {
     }
 })
 
-const cleanUpInvalidBookmarks = asyncHandler(async () => {
-    try {
-        const articleModels = [englishArticle, spanishArticle, frenchArticle, hindiArticle];
+// const cleanUpInvalidBookmarks = asyncHandler(async () => {
+//     try {
+//         const articleModels = [englishArticle, spanishArticle, frenchArticle, hindiArticle];
 
-        // Iterate over all article models
-        for (const model of articleModels) {
-            const validArticleIds = await model.find().distinct('_id');
-            await bookmark.deleteMany({
-                articleId: { $nin: validArticleIds }
-            });
-        }
+//         // Iterate over all article models
+//         for (const model of articleModels) {
+//             const validArticleIds = await model.find().distinct('_id');
+//             await bookmark.deleteMany({
+//                 articleId: { $nin: validArticleIds }
+//             });
+//         }
 
-        console.log('Invalid bookmarks cleaned up successfully');
-    } catch (error) {
-        console.error('Error during bookmarks cleanup:', error);
-    }
-})
+//         console.log('Invalid bookmarks cleaned up successfully');
+//     } catch (error) {
+//         console.error('Error during bookmarks cleanup:', error);
+//     }
+// })
 
 cron.schedule("*/5 * * * *", async () => {
     console.log('Running scheduled task for scraping and cleaning')

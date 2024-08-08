@@ -1,9 +1,12 @@
 import { Router } from "express";
 import {
+    bookmarkArticle,
     createUser,
+    getAllBookmark,
     loginUser,
     logoutUser,
-    refreshAccessToken
+    refreshAccessToken,
+    removeBookmark
 } from "../controller/user.js"
 import { isAuthenticated } from "../middleware/auth.js";
 
@@ -13,5 +16,8 @@ user.post("/user/create", createUser)
 user.post("/user/login", loginUser)
 // user.post("/user/refreshtoken", refreshAccessToken)
 user.get("/user/logout", isAuthenticated, logoutUser)
+user.post("/user/bookmark", isAuthenticated, bookmarkArticle)
+user.delete("/user/bookmark/remove", isAuthenticated, removeBookmark)
+user.get("/user/bookmarks", isAuthenticated, getAllBookmark)
 
 export default user

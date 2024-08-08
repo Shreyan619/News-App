@@ -53,7 +53,7 @@ export const scrapeEl = asyncHandler(async (req, res) => {
         const scrapedData = []
 
         // console.log(`Waiting for selector: ${containerSelector}`);
-        await page.waitForSelector(containerSelector, { timeout: 3000 });
+        await page.waitForSelector(containerSelector, { timeout: 2000 });
 
         const articles = await page.$$(containerSelector);
 

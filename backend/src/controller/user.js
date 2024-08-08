@@ -3,7 +3,19 @@ import { asyncHandler } from "../utils/asyncHandler.js"
 import { errorHandler } from "../utils/errorHandler.js"
 import { apiResponse } from "../utils/apiResponse.js";
 import { genAccessToken, genRefreshToken } from "../utils/token.js"
+import { bookmark } from "../models/bookmark.model.js";
+import { englishArticle } from "../models/english.model.js"
+import { spanishArticle } from "../models/spanish.model.js"
+import { frenchArticle } from "../models/french.model.js"
+import { hindiArticle } from "../models/hindi.model.js"
 import jwt from "jsonwebtoken"
+
+const articleModels = {
+    Englisharticle: englishArticle,
+    Frencharticle: frenchArticle,
+    Spanisharticle: spanishArticle,
+    Hindiarticle: hindiArticle
+}
 
 export const refreshAccessToken = asyncHandler(async (req, res) => {
     const { refreshToken } = req.cookies
@@ -139,4 +151,74 @@ export const logoutUser = asyncHandler(async (req, res) => {
             .status(500)
             .json(new apiResponse(500, error.message));
     }
+})
+
+export const bookmarkArticle = asyncHandler(async (req, res) => {
+    const { articleId, articlemodel } = req.body
+
+    if (!articleId || !articlemodel) {
+        throw new errorHandler(400, "aricleid and language required")
+    }
+
+    const user = req.user._id
+    const articleModel = articleModels[articlemodel]
+
+    if (!articleModel) {
+        throw new errorHandler(400, 'Invalid article model');
+    }
+
+    const articleExist = await articleModel.findById(articleId)
+    if (!articleExist) {
+        throw new errorHandler(404, 'Article not found');
+    }
+
+    const existingBookmark = await bookmark.findOne({ userId: user, articleId, articlemodel })
+
+    if (existingBookmark) {
+        throw new errorHandler(400, 'Article is already bookmarked');
+    }
+
+    const newBoomark = new bookmark({
+        userId: user,
+        articleId,
+        articlemodel
+    })
+
+    await newBoomark.save()
+
+    return res.status(201)
+        .json(new apiResponse(201, "Article bookmarked successfully"))
+})
+
+export const removeBookmark = asyncHandler(async (req, res) => {
+    const { articleId, articlemodel } = req.body;
+    const userId = req.user._id;
+
+    if (!articleId || !articlemodel) {
+        throw new errorHandler(400, "ArticleId and language required");
+    }
+
+    const existingBookmark = await bookmark.findOne({ userId, articleId, articlemodel });
+    if (!existingBookmark) {
+        throw new errorHandler(404, 'Bookmark not found');
+    }
+
+    await bookmark.deleteOne({ userId, articleId, articlemodel })
+
+    return res.status(200)
+        .json(new apiResponse(200, "Bookmark removed successfully"))
+})
+
+export const getAllBookmark = asyncHandler(async (req, res) => {
+    const userId = req.user._id
+
+    const userBookmarks = await bookmark.find({ userId })
+    console.log(userBookmarks)
+
+    if (!userBookmarks.length) {
+        return res.status(404).json(new apiResponse(404, "No bookmarks found for the user"));
+    }
+
+    return res.status(200)
+        .json(new apiResponse(200, userBookmarks, "Bookmarks retrieved successfully"));
 })

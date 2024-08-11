@@ -93,3 +93,29 @@ export const comments = asyncHandler(async (req, res) => {
         throw new errorHandler(400, "error adding comment", error.message)
     }
 })
+
+export const getAllComments = asyncHandler(async (req, res) => {
+    try {
+        const { articleId } = req.params
+
+        if (!articleId) {
+            throw new errorHandler(400, "Article ID is required");
+        }
+        if (!mongoose.Types.ObjectId.isValid(articleId)) {
+            throw new errorHandler(400, "Invalid Article ID format");
+        }
+
+        // Populates the user details if needed
+        const comments = await comment.find({ articleId }).populate('userId', 'name email')
+
+        if (!comments.length) {
+            return res.status(404).json(new apiResponse(404, "No comments found for this article"));
+        }
+
+        return res.status(200)
+            .json(new apiResponse(200, comments, "Comments retrieved successfully"));
+    } catch (error) {
+        console.error(error)
+        throw new errorHandler(500, "Error retrieving comments", error.message)
+    }
+})

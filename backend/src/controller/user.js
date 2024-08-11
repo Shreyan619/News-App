@@ -247,3 +247,53 @@ export const getAllBookmark = asyncHandler(async (req, res) => {
     return res.status(200)
         .json(new apiResponse(200, userBookmarks, "Bookmarks retrieved successfully"));
 })
+
+export const moveBookmarkedArticlesToBookmarkModel = asyncHandler(async (req, res) => {
+    try {
+        const cutOffDate = new Date(Date.now() - 10 * 60 * 1000);
+
+        const bookmarkedArticles = await bookmark.find().distinct('articleId')
+
+        const moveArticles = async (articleModelName) => {
+            const articleModel = articleModels[articleModelName]
+
+            if (!articleModel) {
+                console.error(`No article model found for ${articleModelName}`)
+            }
+
+            const articlesToMove = await articleModel.find({ _id: { $in: bookmarkedArticles } })
+
+            const bookmarkPromises = articlesToMove.map(async (article) => {
+                await bookmark.updateOne({
+                    userId: article.userId,
+                    articleId: article._id,
+                    articlemodel: articleModelName
+                },
+                    {
+                        title: article.title,
+                        image: article.image,
+                        link: article.link,
+                        description: article.description
+                    },
+
+                    {
+                        upsert: true
+                    })
+            })
+            await Promise.all(bookmarkPromises);
+
+            await articleModel.deleteMany({ _id: { $in: bookmarkedArticles } })
+        }
+        await moveArticles('Englisharticle')
+        await moveArticles('Frencharticle');
+        await moveArticles('Spanisharticle');
+        await moveArticles('Hindiarticle');
+
+        console.log("Bookmarked articles moved to bookmark model and deleted from language models");
+
+
+    } catch (error) {
+        console.error("Error moving bookmarked articles:", error.message);
+        throw new errorHandler(500, "Error moving bookmarked articles:", error.message);
+    }
+})

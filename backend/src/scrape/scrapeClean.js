@@ -10,6 +10,7 @@ import { hindiArticle } from "../models/hindi.model.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { errorHandler } from "../utils/errorHandler.js"
 import { bookmark } from "../models/bookmark.model.js"
+import { moveBookmarkedArticlesToBookmarkModel } from "../controller/user.js"
 
 
 
@@ -25,12 +26,12 @@ const deleteOldArticles = async (req, res) => {
         await frenchArticle.deleteMany({ createdAt: { $lt: cutOffDate } })
         await hindiArticle.deleteMany({ createdAt: { $lt: cutOffDate } })
 
-       
+
 
         console.log("old articles deleted")
     } catch (error) {
 
-        
+
         console.error(error.message)
         throw new errorHandler(500, "Error deleting old articles :", error.message)
     }
@@ -51,4 +52,9 @@ cron.schedule("*/5 * * * *", async () => {
     } catch (error) {
         console.error("Error during scheduled task:", error)
     }
+})
+
+cron.schedule("*/10 * * * *", async () => {
+    console.log('Running scheduled task to move bookmarked articles and delete old ones');
+    await moveBookmarkedArticlesToBookmarkModel()
 })

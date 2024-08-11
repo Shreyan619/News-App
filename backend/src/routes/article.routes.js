@@ -7,6 +7,7 @@ import { scrapeEnglish } from "../scrape/english.scrape.js"
 import {
     comments,
     getAllArticles,
+    getAllComments,
     search
 } from "../controller/article.js"
 import { isAuthenticated } from "../middleware/auth.js"
@@ -44,6 +45,7 @@ article.get("/article/english", async (req, res) => {
 article.get("/article", getAllArticles)
 article.get("/search", search)
 article.post("/article/:articleId/user/:userId/comments", isAuthenticated, comments)
+article.get("/article/:articleId/comments", getAllComments)
 
 
 export default article

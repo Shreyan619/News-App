@@ -114,8 +114,9 @@ export const loginUser = asyncHandler(async (req, res) => {
         .json(
             new apiResponse(
                 200,
-                { accessToken, refreshToken },
+                { accessToken, refreshToken, findUser },
                 "User logged In Successfully"
+
             )
         )
 })
@@ -296,4 +297,24 @@ export const moveBookmarkedArticlesToBookmarkModel = asyncHandler(async (req, re
         console.error("Error moving bookmarked articles:", error.message);
         throw new errorHandler(500, "Error moving bookmarked articles:", error.message);
     }
+})
+
+export const updateRole = asyncHandler(async (req, res) => {
+
+    const { userId } = req.params
+    const { role } = req.body
+    console.log(userId)
+    if (!['user', 'admin'].includes(role)) {
+        throw new errorHandler(400, 'Invalid role');
+    }
+
+    const user = await User.findByIdAndUpdate(userId, { role }, { new: true });
+
+    if (!user) {
+        throw new errorHandler(404, 'User not found');
+    }
+
+    return res
+        .status(200)
+        .json(new apiResponse(200, user, "User role updated successfully"))
 })

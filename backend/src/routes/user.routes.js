@@ -6,9 +6,10 @@ import {
     loginUser,
     logoutUser,
     refreshAccessToken,
-    removeBookmark
+    removeBookmark,
+    updateRole
 } from "../controller/user.js"
-import { isAuthenticated } from "../middleware/auth.js";
+import { admin, isAuthenticated } from "../middleware/auth.js";
 
 const user = Router()
 
@@ -18,6 +19,7 @@ user.post("/user/login", loginUser)
 user.get("/user/logout", isAuthenticated, logoutUser)
 user.post("/article/:articleId/user/bookmark", isAuthenticated, bookmarkArticle)
 user.delete("/article/:articleId/user/bookmark/remove", isAuthenticated, removeBookmark)
-user.get("/user/bookmarks", isAuthenticated, getAllBookmark)
+user.put("/user/:userId/role", isAuthenticated, updateRole)
+user.get("/user/:userId/bookmarks", isAuthenticated, admin, getAllBookmark)
 
 export default user

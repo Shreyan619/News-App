@@ -85,7 +85,7 @@
   background-color:#d61f02 ;
 }
 
-.google {
+.google  {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -109,9 +109,11 @@
   font-weight: 400;
   font-style: normal;
   margin-right: 1vmax;
+  font-size:1vmax;
+  color:white;
 }
 .google > svg {
-  font-size: 1.3vmax;
+  font-size: 1.8vmax;
   margin-left: 6%;
   border: none;
   padding: 0.3vmax;

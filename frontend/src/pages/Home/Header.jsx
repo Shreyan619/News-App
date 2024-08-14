@@ -25,7 +25,7 @@ const Header = () => {
             </select>
           </div>
           <div className='search-container'>
-            <input type="text" placeholder="..." />
+            <input type="text" placeholder="Search..." />
             <FaSearch className='search' style={{ cursor: 'pointer' }} />
           </div>
         </div>

@@ -303,7 +303,7 @@ export const updateRole = asyncHandler(async (req, res) => {
 
     const { userId } = req.params
     const { role } = req.body
-    console.log(userId)
+   
     if (!['user', 'admin'].includes(role)) {
         throw new errorHandler(400, 'Invalid role');
     }

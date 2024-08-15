@@ -16,7 +16,7 @@ export const checkAdmin = asyncHandler(async (req, res, next) => {
 export const isAuthenticated = asyncHandler(async (req, res, next) => {
 
     try {
-        const token = req.cookies?.accesstoken
+        const token = req.cookies?.accesstoken || req.headers.authorization?.split(' ')[1]
 
         if (!token) {
             throw new errorHandler("Please Login to access this resource", 401);

@@ -83,7 +83,7 @@ export const createUser = asyncHandler(async (req, res) => {
 export const loginUser = asyncHandler(async (req, res) => {
 
     const { name, email, password, provider } = req.body
-    console.log(req.body)
+    
 
     if (!email) {
         throw new errorHandler(401, "email required")

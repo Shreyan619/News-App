@@ -2,31 +2,31 @@ import React from 'react'
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom'
 import { FcGoogle } from "react-icons/fc";
-import { getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import "../../styles/login.css"
 import { auth } from '../../firebase';
-import { useLoginMutation } from '../../redux/api/userapi';
+import { useCreateMutation } from '../../redux/api/userapi';
 
 const Login = () => {
-    const [login] = useLoginMutation()
+    const [create] = useCreateMutation()
 
     const loginHandler = async () => {
         try {
 
             const provider = new GoogleAuthProvider()
             const user = await signInWithPopup(auth, provider)
+            console.log(user)
+            
 
-
-            const res = await login({
+            const res = await create({
                 name: user.user.displayName,
                 email: user.user.email,
                 _id: user.uid,
                 provider: 'google'
             })
 
-            console.log(res)
             if ("data" in res) {
-                toast.success(res.data.message)
+                toast.success(`Welcome ${res.data.name}`)
             } else {
                 const error = res.error
                 const message = error.data?.message;
@@ -35,7 +35,7 @@ const Login = () => {
 
             // console.log(user)
         } catch (error) {
-            toast.error("Sign in fail" + (error.message || 'Unknown error'))
+            toast.error(error.message || 'Unknown error')
         }
     }
 

@@ -3,9 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const userapi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_SERVER}/api/v1` }),
     endpoints: (build) => ({
-        login: build.mutation({
+        create: build.mutation({
             query: (user) => ({
-                url: '/user/login',
+                url: '/user/create',
                 method: "POST",
                 body: user
             })
@@ -13,4 +13,4 @@ export const userapi = createApi({
     })
 })
 
-export const { useLoginMutation } = userapi
+export const { useCreateMutation } = userapi

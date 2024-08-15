@@ -2,7 +2,7 @@ import React from 'react'
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom'
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { getRedirectResult, GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth"
 import "../../styles/login.css"
 import { auth } from '../../firebase';
 import { useLoginMutation } from '../../redux/api/userapi';
@@ -16,10 +16,15 @@ const Login = () => {
             const provider = new GoogleAuthProvider()
             const user = await signInWithPopup(auth, provider)
 
+
             const res = await login({
-                name: "aryan",
-                email: "aryan@gmail.com"
+                name: user.user.displayName,
+                email: user.user.email,
+                _id: user.uid,
+                provider: 'google'
             })
+
+            console.log(res)
             if ("data" in res) {
                 toast.success(res.data.message)
             } else {
@@ -28,9 +33,9 @@ const Login = () => {
                 toast.error(message)
             }
 
-            console.log(user)
+            // console.log(user)
         } catch (error) {
-            toast.error("Sign in fail")
+            toast.error("Sign in fail" + (error.message || 'Unknown error'))
         }
     }
 
@@ -42,7 +47,7 @@ const Login = () => {
                     <input type='text' placeholder='Email' />
                     <input type='text' placeholder='Password' />
                     <Link className='forgot-pass'>Forgot password</Link>
-                    <button>LOGIN</button>
+                    <button type='submit'>LOGIN</button>
                     <span className='signup'>Don't have an account yet?</span>
                     <button>CREATE ACCOUNT</button>
                 </form>

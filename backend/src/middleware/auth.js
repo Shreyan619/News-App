@@ -2,8 +2,9 @@ import { User } from "../models/user.model.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken"
+import admin from "../firebase/firebase-admin.js";
 
-export const admin = asyncHandler(async (req, res, next) => {
+export const checkAdmin = asyncHandler(async (req, res, next) => {
     if (req.user && req.user.role === 'admin') {
         next()
     }
@@ -20,6 +21,22 @@ export const isAuthenticated = asyncHandler(async (req, res, next) => {
         if (!token) {
             throw new errorHandler("Please Login to access this resource", 401);
         }
+
+        try {
+            const firebaseAuth = admin.auth()
+            const firebaseUser = await firebaseAuth.verifyIdToken(token)
+            req.user = {
+                _id: firebaseUser._id,
+                email: firebaseUser.email,
+                role: 'user',
+                provider: 'google'
+            }
+            next()
+            return;
+        } catch (firebaseError) {
+            console.error('Firebase verification error:', firebaseError)
+        }
+
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
         req.user = await User.findById(decoded._id)

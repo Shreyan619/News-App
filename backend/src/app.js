@@ -14,6 +14,10 @@ app.use(cors({
   credentials: true
 }))
 
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
 
 
 app.use(express.json({ limit: "10mb" }))

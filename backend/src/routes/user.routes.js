@@ -3,14 +3,14 @@ import {
     bookmarkArticle,
     createUser,
     getAllBookmark,
-    googleLogin,
+    // googleLogin,
     loginUser,
     logoutUser,
     refreshAccessToken,
     removeBookmark,
     updateRole
 } from "../controller/user.js"
-import { admin, isAuthenticated } from "../middleware/auth.js";
+import { checkAdmin, isAuthenticated } from "../middleware/auth.js";
 
 const user = Router()
 
@@ -21,7 +21,7 @@ user.get("/user/logout", isAuthenticated, logoutUser)
 user.post("/article/:articleId/user/bookmark", isAuthenticated, bookmarkArticle)
 user.delete("/article/:articleId/user/bookmark/remove", isAuthenticated, removeBookmark)
 user.put("/user/:userId/role", isAuthenticated, updateRole)
-user.get("/user/:userId/bookmarks", isAuthenticated, admin, getAllBookmark)
-user.post("/user/google-login", googleLogin)
+user.get("/user/:userId/bookmarks", isAuthenticated, checkAdmin, getAllBookmark)
+// user.post("/user/google-login", googleLogin)
 
 export default user

@@ -82,10 +82,15 @@ export const createUser = asyncHandler(async (req, res) => {
 
 export const loginUser = asyncHandler(async (req, res) => {
 
-    const { name, email, password } = req.body
+    const { name, email, password, provider } = req.body
+    console.log(req.body)
 
-    if (!(password || email)) {
-        throw new errorHandler(401, "password or email required")
+    if (!email) {
+        throw new errorHandler(401, "email required")
+    }
+
+    if (provider !== 'google' && !password) {
+        throw new errorHandler(401, "Password is required for non-Google logins");
     }
 
     const findUser = await User.findOne({
@@ -330,17 +335,17 @@ export const updateRole = asyncHandler(async (req, res) => {
         .json(new apiResponse(200, user, "User role updated successfully"))
 })
 
-export const googleLogin = asyncHandler(async (req, res) => {
-    const { email, name } = req.body
+// export const googleLogin = asyncHandler(async (req, res) => {
+//     const { email, name } = req.body
 
-    let user = await User.findOne({ email });
+//     let user = await User.findOne({ email });
 
-    if (!user) {
-        user = await User.create({ email, name, provider: 'google' });
-    } else if (user.provider !== 'google') {
-        throw new errorHandler(400, 'User already exists with a different login method.');
-    }
+//     if (!user) {
+//         user = await User.create({ email, name, provider: 'google' });
+//     } else if (user.provider !== 'google') {
+//         throw new errorHandler(400, 'User already exists with a different login method.');
+//     }
 
-    res.status(200)
-        .json(new apiResponse(200, "logged in succesfully", user))
-})
+//     res.status(200)
+//         .json(new apiResponse(200, "logged in succesfully", user))
+// })

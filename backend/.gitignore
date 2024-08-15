@@ -1,6 +1,7 @@
 # Dependency directories
 node_modules
 
+src/firebase/serviceAccountKey.json
 # Environment variables
 .env
 .env.local

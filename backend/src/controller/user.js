@@ -47,9 +47,9 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
 
 export const createUser = asyncHandler(async (req, res) => {
 
-    const { name, email, password } = req.body
+    const { name, email, password, provider = 'local' } = req.body
 
-    if (![name, email, password]) {
+    if (![name, email, password] || (provider !== 'google' && !password)) {
         throw new errorHandler(401, "Please provide all the fields")
     }
 
@@ -60,15 +60,21 @@ export const createUser = asyncHandler(async (req, res) => {
         throw new errorHandler(401, "User with email or name exists")
     }
 
-    const newUser = await User.create({
+    const userData = ({
         name: name.toLowerCase(),
         email,
-        password,
+        provider,
     })
+
+    if (provider !== 'google') {
+        userData.password = password;
+    }
+
+    const newUser = await User.create(userData)
+
     if (!newUser) {
         throw new errorHandler(500, "Something went wrong while registering the user")
     }
-
     return res.status(201).json(
         new apiResponse(200, newUser, "User registered Successfully")
     )
@@ -78,8 +84,8 @@ export const loginUser = asyncHandler(async (req, res) => {
 
     const { name, email, password } = req.body
 
-    if (!(name || email)) {
-        throw new errorHandler(401, "username or email required")
+    if (!(password || email)) {
+        throw new errorHandler(401, "password or email required")
     }
 
     const findUser = await User.findOne({
@@ -87,6 +93,12 @@ export const loginUser = asyncHandler(async (req, res) => {
     })
     if (!findUser) {
         throw new errorHandler(404, "user does not exist")
+    }
+
+    if (findUser.provider === 'google') {
+        // For Google login users, no password check is needed
+        return res.status(200)
+            .json(new apiResponse(200, findUser, "Logged in successfully via Google"));
     }
 
     // Generate tokens
@@ -101,10 +113,9 @@ export const loginUser = asyncHandler(async (req, res) => {
         secure: true
     }
 
-    const isPasswordValid = await findUser.isPasswordCorrect(password)
-
+    const isPasswordValid = await findUser.isPasswordCorrect(password);
     if (!isPasswordValid) {
-        throw new errorHandler(404, "password incorrect")
+        throw new errorHandler(400, 'Invalid password');
     }
 
     return res
@@ -303,7 +314,7 @@ export const updateRole = asyncHandler(async (req, res) => {
 
     const { userId } = req.params
     const { role } = req.body
-   
+
     if (!['user', 'admin'].includes(role)) {
         throw new errorHandler(400, 'Invalid role');
     }
@@ -317,4 +328,19 @@ export const updateRole = asyncHandler(async (req, res) => {
     return res
         .status(200)
         .json(new apiResponse(200, user, "User role updated successfully"))
+})
+
+export const googleLogin = asyncHandler(async (req, res) => {
+    const { email, name } = req.body
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+        user = await User.create({ email, name, provider: 'google' });
+    } else if (user.provider !== 'google') {
+        throw new errorHandler(400, 'User already exists with a different login method.');
+    }
+
+    res.status(200)
+        .json(new apiResponse(200, "logged in succesfully", user))
 })

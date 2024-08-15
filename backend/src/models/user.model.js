@@ -16,7 +16,9 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: function () {
+            return this.provider !== 'google'
+        },
         minlength: 6
     },
     role: {
@@ -31,6 +33,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    provider: {
+        type: String,
+        default: 'local',
+    },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
 
@@ -38,7 +44,7 @@ const userSchema = new mongoose.Schema({
 
 
 userSchema.pre("save", async function (next) {
-    if (this.isModified('password')) {
+    if (this.isModified('password') && this.provider !== 'google') {
         this.password = await bcrypt.hash(this.password, 10)
     }
     next()
@@ -46,6 +52,14 @@ userSchema.pre("save", async function (next) {
 
 
 userSchema.methods.isPasswordCorrect = async function (password) {
+    if (this.provider === 'google') {
+        // Skip password check for Google users
+        return true;
+    }
+    if (!password || !this.provider === 'google') {
+        // If no password or user is a Google user, skip password check
+        return false;
+    }
     return await bcrypt.compare(password, this.password);
 };
 

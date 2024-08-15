@@ -3,6 +3,7 @@ import {
     bookmarkArticle,
     createUser,
     getAllBookmark,
+    googleLogin,
     loginUser,
     logoutUser,
     refreshAccessToken,
@@ -21,5 +22,6 @@ user.post("/article/:articleId/user/bookmark", isAuthenticated, bookmarkArticle)
 user.delete("/article/:articleId/user/bookmark/remove", isAuthenticated, removeBookmark)
 user.put("/user/:userId/role", isAuthenticated, updateRole)
 user.get("/user/:userId/bookmarks", isAuthenticated, admin, getAllBookmark)
+user.post("/user/google-login", googleLogin)
 
 export default user

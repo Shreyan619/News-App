@@ -5,14 +5,29 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import "../../styles/login.css"
 import { auth } from '../../firebase';
+import { useLoginMutation } from '../../redux/api/userapi';
 
 const Login = () => {
+    const [login] = useLoginMutation()
 
     const loginHandler = async () => {
         try {
 
             const provider = new GoogleAuthProvider()
             const user = await signInWithPopup(auth, provider)
+
+            const res = await login({
+                name: "aryan",
+                email: "aryan@gmail.com"
+            })
+            if ("data" in res) {
+                toast.success(res.data.message)
+            } else {
+                const error = res.error
+                const message = error.data?.message;
+                toast.error(message)
+            }
+
             console.log(user)
         } catch (error) {
             toast.error("Sign in fail")

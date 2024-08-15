@@ -18,11 +18,13 @@
   flex-direction: column;
   padding: 0 40px;
   height: 100%;
+  flex-grow: 1;
+  justify-content: center;
 }
 .login > input {
   border-radius: 2px;
   width: 30%;
-  height: 2.5vmax;
+  padding: 0.8vmax;
   border: none;
   margin-top: 1.5vmax;
   background-color: #636774;
@@ -56,16 +58,15 @@
   color: white;
   background-color: #f14358;
   width: 8%;
-  height: 10%;
+  padding: 1vmax;
   font-size: 1vmax;
   cursor: pointer;
   border: none;
   border-radius: 2px;
 }
-.login > button:hover{
-  background-color:#d83347; 
+.login > button:hover {
+  background-color: #d83347;
 }
-
 
 .signup {
   margin-top: 3vmax;
@@ -81,11 +82,11 @@
   border: solid red;
   margin-top: 1vmax;
 }
-.login > button:nth-of-type(2):hover{
-  background-color:#d61f02 ;
+.login > button:nth-of-type(2):hover {
+  background-color: #d61f02;
 }
 
-.google  {
+.google {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -94,7 +95,7 @@
   width: 14%;
   height: 5%;
   background-color: #43d43c;
-  /* padding:0.3vmax 0vmax; */
+  padding:0.3vmax 0vmax;
   border-radius: 2px;
   border: none;
   cursor: pointer;
@@ -109,8 +110,8 @@
   font-weight: 400;
   font-style: normal;
   margin-right: 1vmax;
-  font-size:1vmax;
-  color:white;
+  font-size: 1vmax;
+  color: white;
 }
 .google > svg {
   font-size: 1.8vmax;
@@ -119,5 +120,5 @@
   padding: 0.3vmax;
   background-color: white;
   border-radius: 2px;
-  box-shadow: 1px 1px 3px #828A81;
+  box-shadow: 1px 1px 3px #828a81;
 }

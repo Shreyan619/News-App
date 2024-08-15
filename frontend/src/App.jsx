@@ -12,7 +12,7 @@ const App = () => {
     <>
       <Router>
         <div id='root'>
-          <Toaster />
+          <Toaster position="top-center"/>
           <div className='main-content'>
             <Routes>
               <Route path='/home' element={<Header />} />

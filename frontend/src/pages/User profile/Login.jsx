@@ -5,10 +5,11 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import "../../styles/login.css"
 import { auth } from '../../firebase';
-import { useCreateMutation } from '../../redux/api/userapi';
+import { useLoginMutation, useCreateMutation } from '../../redux/api/userapi';
 
 const Login = () => {
-    const [create] = useCreateMutation()
+    const [login] = useLoginMutation()
+    const [create]=useCreateMutation()
 
     const loginHandler = async () => {
         try {
@@ -18,12 +19,18 @@ const Login = () => {
             console.log(user)
             
 
-            const res = await create({
+            const userData = {
                 name: user.user.displayName,
                 email: user.user.email,
                 _id: user.uid,
                 provider: 'google'
-            })
+            }
+
+            let res = await login(userData)
+
+            if (res.error && res.error.data?.message === 'User not found') {
+                res = await create(userData);
+            }
 
             if ("data" in res) {
                 toast.success(`Welcome ${res.data.name}`)
@@ -41,7 +48,7 @@ const Login = () => {
 
     return (
         <div id='Profile'>
-            <div >
+            <div style={{display:"flex"}} >
                 <form className='login'>
                     <h1 className='heading'>Login</h1>
                     <input type='text' placeholder='Email' />

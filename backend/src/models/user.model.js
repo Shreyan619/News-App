@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 import validator from "validator"
-import bcrypt from "bcrypt"
+import bcrypt from 'bcryptjs'
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -56,7 +56,7 @@ userSchema.methods.isPasswordCorrect = async function (password) {
         // Skip password check for Google users
         return true;
     }
-    if (!password || !this.provider === 'google') {
+    if (!password) {
         // If no password or user is a Google user, skip password check
         return false;
     }

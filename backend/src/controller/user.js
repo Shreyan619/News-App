@@ -83,7 +83,7 @@ export const createUser = asyncHandler(async (req, res) => {
 export const loginUser = asyncHandler(async (req, res) => {
 
     const { name, email, password, provider } = req.body
-    
+
 
     if (!email) {
         throw new errorHandler(401, "email required")
@@ -97,15 +97,19 @@ export const loginUser = asyncHandler(async (req, res) => {
         $or: [{ name }, { email }]
     })
     if (!findUser) {
-        throw new errorHandler(404, "user does not exist")
-    }
 
-    if (findUser.provider === 'google') {
-        // For Google login users, no password check is needed
-        return res.status(200)
-            .json(new apiResponse(200, findUser, "Logged in successfully via Google"));
-    }
+        if (provider === 'google') {
+            findUser = await User.create({ name, email, provider });
+        } else {
+            throw new errorHandler(404, "User does not exist");
+        }
+    } else {
+        if (provider === 'google') {
 
+            return res.status(200)
+                .json(new apiResponse(200, findUser, "Logged in successfully via Google"));
+        }
+    }
     // Generate tokens
     const accessToken = genAccessToken(findUser._id)
     const refreshToken = genRefreshToken(findUser._id)

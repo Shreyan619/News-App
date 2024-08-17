@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { User } from '../../../../backend/src/models/user.model'
 
 export const userapi = createApi({
+    reducerPath: 'userapi',
     baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_SERVER}/api/v1` }),
     endpoints: (build) => ({
         login: build.mutation({

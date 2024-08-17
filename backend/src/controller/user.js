@@ -93,9 +93,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         throw new errorHandler(401, "Password is required for non-Google logins");
     }
 
-    const findUser = await User.findOne({
-        $or: [{ name }, { email }]
-    })
+    let findUser = await User.findOne({ email })
     if (!findUser) {
 
         if (provider === 'google') {

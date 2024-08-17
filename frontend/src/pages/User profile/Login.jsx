@@ -77,13 +77,13 @@ const Login = () => {
             <div style={{ display: "flex" }} >
                 <form className='login' onSubmit={handleFormSubmit}>
                     <h1 className='heading'>Login</h1>
-                    <input type='text'
+                    <input type='email'
                         placeholder='Email'
                         name='email'
                         value={email}
                         onChange={handleInputChange}
                     />
-                    <input type='text'
+                    <input type='password'
                         placeholder='Password'
                         name='password'
                         value={password}

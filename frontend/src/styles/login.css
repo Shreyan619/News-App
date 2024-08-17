@@ -10,6 +10,7 @@
   background-color: black;
   color: white;
   font-family: "Roboto", sans-serif;
+  justify-content: flex-start;
 }
 
 .login {
@@ -19,7 +20,14 @@
   padding: 0 40px;
   height: 100%;
   flex-grow: 1;
-  justify-content: center;
+}
+
+.heading {
+  font-size: 4vmax;
+  margin-bottom: 8px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 .login > input {
   border-radius: 2px;
@@ -34,13 +42,6 @@
   color: white;
   font-size: 0.8rem;
   padding: 0 20px;
-}
-.heading {
-  font-size: 4vmax;
-  margin-bottom: 8px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  font-style: normal;
 }
 
 .forgot-pass {
@@ -91,7 +92,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 1vmax 10.4vmax  10.4vmax ;
+  margin: 0.1vmax 10.4vmax;
   width: 14%;
   height: 5%;
   background-color: #43d43c;

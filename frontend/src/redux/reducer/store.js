@@ -3,7 +3,7 @@ import { userapi } from '../api/userapi'
 
 export const store = configureStore({
     reducer: {
-        userapi: userapi.reducer
+        [userapi.reducerPath]: userapi.reducer
     },
     middleware:(getDefaultMiddleware)=>[...getDefaultMiddleware(),userapi.middleware]
 })

@@ -11,10 +11,11 @@ import {
     updateRole
 } from "../controller/user.js"
 import { checkAdmin, isAuthenticated } from "../middleware/auth.js";
+import upload from "../middleware/multer.js";
 
 const user = Router()
 
-user.post("/user/create", createUser)
+user.post("/user/create", upload.single('picture'), createUser)
 user.post("/user/login", loginUser)
 // user.post("/user/refreshtoken", refreshAccessToken)
 user.get("/user/logout", isAuthenticated, logoutUser)

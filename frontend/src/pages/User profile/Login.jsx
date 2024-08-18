@@ -92,7 +92,10 @@ const Login = () => {
                     <Link className='forgot-pass'>Forgot password</Link>
                     <button type='submit'>LOGIN</button>
                     <span className='signup'>Don't have an account yet?</span>
-                    <button>CREATE ACCOUNT</button>
+                    <Link className='create' to="/signup">
+                        <button>CREATE ACCOUNT</button>
+                    </Link>
+
                 </form>
             </div>
 

@@ -12,11 +12,26 @@ export const userapi = createApi({
             })
         }),
         create: build.mutation({
-            query: (user) => ({
-                url: '/user/create',
-                method: "POST",
-                body: user
-            })
+            query: (user) => {
+                const formData = new FormData()
+
+                formData.append('name', user.name);
+                formData.append('email', user.email);
+                formData.append('password', user.password);
+                formData.append('provider', user.provider);
+
+                if (user.picture) {
+                    formData.append('picture', user.picture);
+                }
+                return {
+                    url: '/user/create',
+                    method: "POST",
+                    body: formData,
+                    // headers: {
+                    //     'Content-Type': 'multipart/form-data',
+                    // }
+                }
+            }
         })
     })
 })

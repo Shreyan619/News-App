@@ -8,6 +8,8 @@ import { englishArticle } from "../models/english.model.js"
 import { spanishArticle } from "../models/spanish.model.js"
 import { frenchArticle } from "../models/french.model.js"
 import { hindiArticle } from "../models/hindi.model.js"
+import { bucket } from "../firebase/firebase-admin.js";
+import { v4 as uuidv4 } from "uuid"
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
 
@@ -48,6 +50,7 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
 export const createUser = asyncHandler(async (req, res) => {
 
     const { name, email, password, provider = 'local' } = req.body
+    const picture = req.file
 
     if (![name, email, password] || (provider !== 'google' && !password)) {
         throw new errorHandler(401, "Please provide all the fields")
@@ -68,6 +71,20 @@ export const createUser = asyncHandler(async (req, res) => {
 
     if (provider !== 'google') {
         userData.password = password;
+    }
+
+    if (picture) {
+        const fileName = `{uuidv4()}_${picture.originalname}`
+        const fileUpload = bucket.file(fileName)
+
+        await fileUpload.save(picture.buffer, {
+            metadata: {
+                contentType: picture.mimeyype
+            }
+        })
+
+        const fileUrl = `https://storage.googleapis.com/${bucket.name}/${fileName}`;
+        userData.picture = fileUrl
     }
 
     const newUser = await User.create(userData)

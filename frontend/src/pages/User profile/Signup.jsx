@@ -97,6 +97,11 @@ const Signup = () => {
             </div>
           </div>
           <div className='file-input-container'>
+            {picturePreview && (
+              <div className='picture-preview'>
+                <img src={picturePreview} alt='Profile Preview' />
+              </div>
+            )}
             <span>Profile picture (optional)</span>
             <label htmlFor='profilePicture' className='file-input-label'>
               Choose Picture
@@ -108,11 +113,6 @@ const Signup = () => {
               className='file-input'
               onChange={handleFileChange}
             />
-            {picturePreview && (
-              <div className='picture-preview'>
-                <img src={picturePreview} alt='Profile Preview' />
-              </div>
-            )}
           </div>
           <button>Signup</button>
         </form>

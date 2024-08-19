@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast"
 import Login from './pages/User profile/Login'
 import Footer from './pages/Home/Footer'
 import Signup from './pages/User profile/Signup'
+import EnglishNews from './pages/articles/englishNews'
 import './index.css'
 
 
@@ -13,13 +14,16 @@ const App = () => {
     <>
       <Router>
         <div id='root'>
-          <Toaster position="top-center"/>
+          <Toaster position="top-center" />
+          <Header/>
           <div className='main-content'>
             <Routes>
               <Route path='/home' element={<Header />} />
 
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
+
+              <Route path='/article/english' element={<EnglishNews />} />
             </Routes>
           </div>
           <Footer />

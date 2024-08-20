@@ -96,7 +96,8 @@ export const scrapeEl = asyncHandler(async (req, res) => {
 
                         } else {
 
-                            console.log(`Article already exists: ${articleData.link}`);
+                            // console.log(`Article already exists: ${articleData.link}`);
+                            // throw new errorHandler(400,`Article already exists: ${articleData.link}`)
 
                         }
                     }

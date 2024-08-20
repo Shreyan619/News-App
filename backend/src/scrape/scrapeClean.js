@@ -7,11 +7,9 @@ import { englishArticle } from "../models/english.model.js"
 import { frenchArticle } from "../models/french.model.js"
 import { spanishArticle } from "../models/spanish.model.js"
 import { hindiArticle } from "../models/hindi.model.js"
-import { asyncHandler } from "../utils/asyncHandler.js"
 import { errorHandler } from "../utils/errorHandler.js"
-import { bookmark } from "../models/bookmark.model.js"
 import { moveBookmarkedArticlesToBookmarkModel } from "../controller/user.js"
-
+import { getEnglish } from "../controller/article.js"
 
 
 // delete old articles
@@ -58,3 +56,22 @@ cron.schedule("*/10 * * * *", async () => {
     console.log('Running scheduled task to move bookmarked articles and delete old ones');
     await moveBookmarkedArticlesToBookmarkModel()
 })
+
+cron.schedule("0 * * * *", async () => {
+    console.log('Running scheduled task to fetch English articles');
+
+    try {
+        const req = {}; // simulate the request object here
+        const res = {
+            status: (statusCode) => ({
+                json: (response) => console.log('Fetched Articles:', response),
+            }),
+        };
+
+        await getEnglish(req, res);
+
+        console.log("Fetching completed successfully")
+    } catch (error) {
+        console.error("Error during scheduled task:", error)
+    }
+});

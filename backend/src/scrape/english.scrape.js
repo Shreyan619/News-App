@@ -65,13 +65,15 @@ export const scrapeEnglish = asyncHandler(async () => {
                     }
 
                     const articleTitle = await article.$eval(title, el => el.getAttribute('title') || el.innerText).catch(() => null);
+                    // console.log(articleTitle)
 
                     const articleLink = await article.$eval(link, el => el.href).catch(() => null);
+                    // console.log(articleLink)
 
                     const articleImage = image ? await article.$eval(image, el => el.src).catch(() => null) : null;
-
+                    // console.log(articleImage)
                     const articleDescription = description ? await article.$eval(description, el => el.textContent.trim()).catch(() => null) : null;
-
+                    // console.log(articleDescription)
 
 
                     if (articleTitle || articleLink || articleImage || articleDescription) {
@@ -81,19 +83,20 @@ export const scrapeEnglish = asyncHandler(async () => {
                             description: articleDescription,
                             image: articleImage,
                         };
-
+                        // console.log(articleData)
                         const existingArticle = await englishArticle.findOne({ link: articleData.link })
 
                         if (!existingArticle) {
 
                             const newArticle = new englishArticle(articleData)
                             await newArticle.save()
+                            // console.log('Saved article:', articleData);
                             scrapedData.push(articleData)
 
                         } else {
 
-                            console.log(`Article already exists: ${articleData.link}`);
-
+                            // console.log(`Article already exists: ${articleData.link}`);
+                            // throw new errorHandler(400,`Article already exists: ${articleData.link}`)
                         }
                     }
 
@@ -103,7 +106,7 @@ export const scrapeEnglish = asyncHandler(async () => {
             }
         }
 
-        // console.log(scrapedData);
+        // console.log('Scraped Data:', scrapedData)
         await browser.close();
         return scrapedData
 

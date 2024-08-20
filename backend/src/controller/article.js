@@ -119,3 +119,71 @@ export const getAllComments = asyncHandler(async (req, res) => {
         throw new errorHandler(500, "Error retrieving comments", error.message)
     }
 })
+
+export const getEnglish = asyncHandler(async (req, res) => {
+    try {
+        const articles = await englishArticle.find({})
+
+        if (articles.length === 0) {
+            return res.status(404)
+                .json(new apiResponse(404, 'No articles found'))
+        }
+
+        res.status(200)
+            .json(new apiResponse(200, 'Articles retrieved successfully', articles))
+    } catch (error) {
+        console.error(error)
+        throw new errorHandler(500, 'Error retrieving articles', error.message)
+    }
+})
+
+export const getSpanish = asyncHandler(async (req, res) => {
+    try {
+        const articles = await spanishArticle.find({})
+
+        if (articles.length === 0) {
+            return res.status(404)
+                .json(new apiResponse(404, 'No articles found'))
+        }
+
+        res.status(200)
+            .json(new apiResponse(200, 'Articles retrieved successfully', articles))
+    } catch (error) {
+        console.error(error)
+        throw new errorHandler(500, 'Error retrieving articles', error.message)
+    }
+})
+
+export const getFrench = asyncHandler(async (req, res) => {
+    try {
+        const articles = await frenchArticle.find({})
+
+        if (articles.length === 0) {
+            return res.status(404)
+                .json(new apiResponse(404, 'No articles found'))
+        }
+
+        res.status(200)
+            .json(new apiResponse(200, 'Articles retrieved successfully', articles))
+    } catch (error) {
+        console.error(error)
+        throw new errorHandler(500, 'Error retrieving articles', error.message)
+    }
+})
+
+export const getHindi = asyncHandler(async (req, res) => {
+    try {
+        const articles = await hindiArticle.find({})
+
+        if (articles.length === 0) {
+            return res.status(404)
+                .json(new apiResponse(404, 'No articles found'))
+        }
+
+        res.status(200)
+            .json(new apiResponse(200, 'Articles retrieved successfully', articles))
+    } catch (error) {
+        console.error(error)
+        throw new errorHandler(500, 'Error retrieving articles', error.message)
+    }
+})

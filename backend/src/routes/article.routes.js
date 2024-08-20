@@ -8,6 +8,10 @@ import {
     comments,
     getAllArticles,
     getAllComments,
+    getEnglish,
+    getFrench,
+    getHindi,
+    getSpanish,
     search
 } from "../controller/article.js"
 import { isAuthenticated } from "../middleware/auth.js"
@@ -37,15 +41,24 @@ article.get("/article/france", async (req, res) => {
 
 //english
 article.get("/article/english", async (req, res) => {
-    const result = await scrapeEnglish()
-    res.status(500)
-        .json(new apiResponse(201, "English Articles scraped and saved successfully", result))
+    try {
+        const result = await scrapeEnglish();
+        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        // console.log('Result from scrapeEnglish:', result)
+    } catch (error) {
+        res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
+    }
 })
 
 article.get("/article", getAllArticles)
 article.get("/search", search)
 article.post("/article/:articleId/user/:userId/comments", isAuthenticated, comments)
 article.get("/article/:articleId/comments", getAllComments)
+
+article.get("/article/englishnews", getEnglish)
+article.get("/article/frenchnews", getFrench)
+article.get("/article/spanishnews", getSpanish)
+article.get("/article/hindinews", getHindi)
 
 
 export default article

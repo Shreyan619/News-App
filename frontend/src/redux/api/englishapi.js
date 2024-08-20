@@ -6,7 +6,7 @@ export const englishapi = createApi({
     endpoints: (build) => ({
         scrapeEnglish: build.query({
             query: (english) => ({
-                url: '/article/english',
+                url: '/article/englishnews',
                 method: 'GET',
                 body: english
             })
@@ -15,4 +15,4 @@ export const englishapi = createApi({
 
 })
 
-export const { useEnglishApi } = englishapi 
+export const { useScrapeEnglishQuery } = englishapi 

@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+
+.english {
+  padding: 1vmax;
+  width: 100%;
+  margin: auto;
+  /* background-color:#f3eeee ; */
+}
+.header {
+  padding: 1vmax;
+  font-size: 2rem;
+  /* margin-bottom: 20px; */
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+}
+.top-stories {
+  padding: 1vmax 5vmax;
+  font-size: 2vmax;
+  /* margin-bottom: 1vmax; */
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.articles-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.large-article {
+  width: 80%;
+  height: 30%;
+  grid-column: 1 / 2; /* Large article occupies the first column */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  padding: 1vmax;
+}
+
+.article-image-large {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0px 5px 5px #cfcccc;
+}
+.article-image-large:hover{
+    filter: brightness(1.1);
+    transition: filter 0.3s ease;
+}
+
+.article-title-large {
+  width: 100%;
+  font-size: 2.8vmax;
+  margin-top: 10px;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: #333000;
+}
+.article-title-large:hover {
+  text-decoration: underline #0a44c0;
+  transition: text-decoration 0.3s ease;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.small-articles {
+  grid-column: 2 / 3; /* Small articles occupy the second column */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.small-article {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  align-items: flex-start;
+}
+.article-image-small {
+  width: 30%; /* Adjust based on your layout needs */
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  /* margin-left: 10px; */
+}
+
+.article-title-small {
+  font-size: 1.5vmax; /* Adjust based on your layout needs */
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #333;
+  text-align: left;
+  flex-grow: 1;
+}

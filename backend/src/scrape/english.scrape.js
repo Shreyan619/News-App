@@ -40,7 +40,11 @@ export const scrapeEnglish = asyncHandler(async () => {
                 image: "li:nth-child(4) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
 
             },
-
+            {
+                title:"CarouselSlide--active.CarouselSlide--inView.VideoCarousel__Item > a > h3 > span",
+                link: "CarouselSlide--active.CarouselSlide--inView.VideoCarousel__Item > a",
+                image:"CarouselSlide--inView.VideoCarousel__Item > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
+            }
 
 
 

@@ -35,10 +35,10 @@ const Header = () => {
         <div className='news-section flex'>
           {/* <div className=''> */}
 
-            <h3>Crime</h3>
-            <h3>Sports</h3>
-            <h3>Politics</h3>
-            <h3>Entertainment</h3>
+            <h4>Crime</h4>
+            <h4>Sports</h4>
+            <h4>Politics</h4>
+            <h4>Entertainment</h4>
           {/* </div> */}
         </div>
       </div>

@@ -1,13 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoMenu } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import "../../styles/header.css"
 
 const Header = () => {
+  const [scroll, setScroll] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setScroll(scrollTop > 0);
+    }
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
-      <header id='header' >
+      <header id='header' className={scroll ? 'scrolled' : ''}>
         <div className='main flex'>
           <div className='news-group'>
             <h3>Latest</h3>
@@ -31,14 +44,14 @@ const Header = () => {
         </div>
       </header>
 
-      <div  id='nav'>
+      <div id='nav'>
         <div className='news-section flex'>
           {/* <div className=''> */}
 
-            <h4>Crime</h4>
-            <h4>Sports</h4>
-            <h4>Politics</h4>
-            <h4>Entertainment</h4>
+          <h4>Crime</h4>
+          <h4>Sports</h4>
+          <h4>Politics</h4>
+          <h4>Entertainment</h4>
           {/* </div> */}
         </div>
       </div>

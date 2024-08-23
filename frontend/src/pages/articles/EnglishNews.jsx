@@ -2,6 +2,11 @@ import React from 'react'
 import { useScrapeEnglishQuery } from '../../redux/api/englishapi'
 import "../../styles/englishnews.css"
 
+const formatTime = () => {
+  const date = new Date('2024-08-22T10:00:00');
+  return date.toLocaleTimeString(); // Customize the format as needed
+}
+
 const englishNews = () => {
   const { data: response, error, isLoading } = useScrapeEnglishQuery()
 
@@ -25,6 +30,7 @@ const englishNews = () => {
             <div className='large-article'>
               <a href={articles[0].link} target='_blank' rel='noopener noreferrer'>
                 <h2 className='article-title-large'>{articles[0].title}</h2>
+                {/* <p className='article-time-large'>{formatTime(articles[0].time)}</p> */}
                 <img src={articles[0].image} alt={articles[0].title} className='article-image-large' />
               </a>
             </div>
@@ -33,8 +39,9 @@ const englishNews = () => {
                 <div className='small-article' key={index}>
                   <a href={article.link} target='_blank' rel='noopener noreferrer'>
                     <p className='article-title-small'>{article.title}</p>
+                    {/* <p className='article-time-small'>{formatTime(article.time)}</p> */}
                   </a>
-                    <img src={article.image} alt={article.title} className='article-image-small' />
+                    <img src={article.image} alt={article.title} className='article-image-small'/>
                 </div>
               ))}
             </div>

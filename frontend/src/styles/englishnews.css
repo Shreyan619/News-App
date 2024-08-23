@@ -4,7 +4,7 @@
   padding: 1vmax;
   width: 100%;
   margin: auto;
-  /* background-color:#f3eeee ; */
+  background-color: #f3f3ef;
 }
 .header {
   padding: 1vmax;
@@ -34,13 +34,17 @@
 .large-article {
   width: 80%;
   height: 30%;
-  grid-column: 1 / 2; /* Large article occupies the first column */
+  grid-column: 1 / 2;
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
   padding: 1vmax;
 }
-
+.article-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .article-image-large {
   width: 100%;
   height: auto;
@@ -48,9 +52,9 @@
   object-fit: cover;
   box-shadow: 0px 5px 5px #cfcccc;
 }
-.article-image-large:hover{
-    filter: brightness(1.1);
-    transition: filter 0.3s ease;
+.article-image-large:hover {
+  filter: brightness(1.1);
+  transition: filter 0.3s ease;
 }
 
 .article-title-large {
@@ -72,7 +76,7 @@ a {
   color: inherit;
 }
 .small-articles {
-  grid-column: 2 / 3; /* Small articles occupy the second column */
+  grid-column: 2 / 3;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -85,19 +89,35 @@ a {
   align-items: flex-start;
 }
 .article-image-small {
-  width: 30%; /* Adjust based on your layout needs */
+  width: 35%;
   height: auto;
   border-radius: 10px;
   object-fit: cover;
-  /* margin-left: 10px; */
+  margin-left: 20px;
+}
+.article-image-small:hover {
+  filter: brightness(1.1);
+  transition: filter 0.3s ease;
 }
 
 .article-title-small {
-  font-size: 1.5vmax; /* Adjust based on your layout needs */
+  padding: 1vmax 1vmax;
+  font-size: 1.5vmax;
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
   color: #333;
   text-align: left;
   flex-grow: 1;
+}
+.article-title-small:hover {
+  text-decoration: underline #0a44c0;
+  transition: text-decoration 0.3s ease;
+}
+.article-time-large {
+  color: #fd2c25;
+}
+.article-time-small {
+  padding: 1vmax;
+  color: #fd2c25;
 }

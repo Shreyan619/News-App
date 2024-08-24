@@ -26,26 +26,36 @@ export const scrapeEnglish = asyncHandler(async () => {
                 title: "li:nth-child(2) > a > h3 > span",
                 link: "li:nth-child(2) > a",
                 image: "li:nth-child(2) > a > div > figure > div.Image__Wrapper.aspect-ratio--child > img",
-                
+
             },
             {
                 title: "li:nth-child(3) > a > h3 > span",
                 link: "li:nth-child(3) > a",
                 image: "li:nth-child(3) > a > div > figure > div.Image__Wrapper.aspect-ratio--child > img",
-                
+
             },
             {
                 title: "li:nth-child(4) > a > h3 > span",
                 link: "li:nth-child(4) > a",
                 image: "li:nth-child(4) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
-                
+
             },
             {
-                // title:"VideoCarousel__Item > a > h3 > span",
-                // link: "VideoCarousel__Item > a",
-                // image:"div.Image__Wrapper.aspect-ratio--child > img"
+                title: "li:nth-child(5) > a > h3 > span",
+                link: "li:nth-child(5) > a",
+                image: "li:nth-child(5) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
             },
-       
+            {
+                title: "li:nth-child(6) > a > h3 > span",
+                link: "li:nth-child(6) > a",
+                image: "li:nth-child(6) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
+            },
+            {
+                title: "li:nth-child(7) > a > h3 > span",
+                link: "li:nth-child(7) > a",
+                image: "li:nth-child(7) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
+            }
+
 
         ];
 
@@ -68,7 +78,7 @@ export const scrapeEnglish = asyncHandler(async () => {
                     }
 
                     const articleTitle = await article.$eval(title, el => el.getAttribute('title') || el.innerText).catch(() => null);
-                    console.log(articleTitle)
+                    // console.log(articleTitle)
 
                     const articleLink = await article.$eval(link, el => el.href).catch(() => null);
                     // console.log(articleLink)

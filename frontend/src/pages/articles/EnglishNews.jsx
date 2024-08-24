@@ -1,6 +1,10 @@
 import React from 'react'
 import { useScrapeEnglishQuery } from '../../redux/api/englishapi'
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "../../styles/englishnews.css"
+
 
 const formatTime = () => {
   const date = new Date('2024-08-22T10:00:00');
@@ -19,10 +23,22 @@ const englishNews = () => {
   if (error) return <p>Error loading articles!</p>;
   if (!articles.length) return <p>No articles available</p>
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    vertical: true, // Enable vertical scrolling
+    autoplay: true,
+    autoplaySpeed: 3000,
+    verticalSwiping: true
+  }
+
   return (
     <section className='english'>
       <header className='header'>English News</header>
-      <hr/>
+      <hr />
       <h2 className='top-stories'>Top Stories</h2>
       <div className='articles-container'>
         {articles.length > 0 && (
@@ -35,15 +51,17 @@ const englishNews = () => {
               </a>
             </div>
             <div className='small-articles'>
-              {articles.slice(1, 6).map((article, index) => (
-                <div className='small-article' key={index}>
+              <Slider {...settings}>
+                {articles.slice(1, 6).map((article, index) => (
                   <a href={article.link} target='_blank' rel='noopener noreferrer'>
-                    <p className='article-title-small'>{article.title}</p>
-                    {/* <p className='article-time-small'>{formatTime(article.time)}</p> */}
+                    <div className='small-article' key={index}>
+                      <p className='article-title-small'>{article.title}</p>
+                      {/* <p className='article-time-small'>{formatTime(article.time)}</p> */}
+                      <img src={article.image} alt={article.title} className='article-image-small' />
+                    </div>
                   </a>
-                    <img src={article.image} alt={article.title} className='article-image-small'/>
-                </div>
-              ))}
+                ))}
+              </Slider>
             </div>
           </>
         )}

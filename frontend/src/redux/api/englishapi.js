@@ -10,9 +10,16 @@ export const englishapi = createApi({
                 method: 'GET',
                 body: english
             })
+        }),
+        scrapeEnglishTech: build.query({
+            query: (english) => ({
+                url: '/article/englishtech',
+                method: 'GET',
+                body: english
+            })
         })
     })
 
 })
 
-export const { useScrapeEnglishQuery } = englishapi 
+export const { useScrapeEnglishQuery, useScrapeEnglishTechQuery } = englishapi 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useScrapeEnglishQuery } from '../../redux/api/englishapi'
+import { useScrapeEnglishQuery, useScrapeEnglishTechQuery } from '../../redux/api/englishapi'
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -13,15 +13,20 @@ const formatTime = () => {
 
 const englishNews = () => {
   const { data: response, error, isLoading } = useScrapeEnglishQuery()
+  const { data: techResponse, error: techError, isLoading: techLoading } = useScrapeEnglishTechQuery()
 
   const articles = response?.data || []
+  const techArticles = techResponse?.data || [];
   if (articles) {
     console.log(articles)
   }
+  if (techArticles) {
+    console.log(techArticles)
+  }
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading articles!</p>;
-  if (!articles.length) return <p>No articles available</p>
+  if (isLoading || techLoading) return <p>Loading...</p>;
+  if (error || techError) return <p>Error loading articles!</p>;
+  if (!articles.length && !techArticles.length) return <p>No articles available</p>
 
   const settings = {
     dots: true,
@@ -46,7 +51,6 @@ const englishNews = () => {
             <div className='large-article'>
               <a href={articles[0].link} target='_blank' rel='noopener noreferrer'>
                 <h2 className='article-title-large'>{articles[0].title}</h2>
-                {/* <p className='article-time-large'>{formatTime(articles[0].time)}</p> */}
                 <img src={articles[0].image} alt={articles[0].title} className='article-image-large' />
               </a>
             </div>
@@ -55,9 +59,8 @@ const englishNews = () => {
                 {articles.slice(1, 6).map((article, index) => (
                   <div key={article.id || index} className='small-article-wrapper'>
                     <a href={article.link} target='_blank' rel='noopener noreferrer'>
-                      <div className='small-article' key={article.id}>
+                      <div className='small-article'>
                         <p className='article-title-small'>{article.title}</p>
-                        {/* <p className='article-time-small'>{formatTime(article.time)}</p> */}
                         <img src={article.image} alt={article.title} className='article-image-small' />
                       </div>
                     </a>
@@ -65,19 +68,20 @@ const englishNews = () => {
                 ))}
               </Slider>
             </div>
-
-            <div className='rest-articles'>
-              {articles.slice(6).map((article, index) => (
-                <div key={article.id || index} className='rest-article'>
-                  <a href={article.link} target='_blank' rel='noopener noreferrer'>
-                    <h3 className='article-title'>{article.title}</h3>
-                    <img src={article.image} alt={article.title} className='article-image' />
-                  </a>
-                </div>
-              ))}
-            </div>
           </>
         )}
+      </div>
+      <hr />
+      <div className='Tech'>
+        {techArticles.map((article, index) => (
+          <div key={article.id || index} className='Tech-news'>
+            <a href={article.link} target='_blank' rel='noopener noreferrer'>
+              <h3 className='article-title-Tech'>{article.title}</h3>
+              <h5 className='article-description-Tech'>{article.description}</h5>
+              <img src={article.image} alt={article.title} className='article-image-Tech' />
+            </a>
+          </div>
+        ))}
       </div>
     </section>
   )

@@ -9,6 +9,7 @@ import {
     getAllArticles,
     getAllComments,
     getEnglish,
+    getEnglishTech,
     getFrench,
     getHindi,
     getSpanish,
@@ -50,7 +51,7 @@ article.get("/article/english", async (req, res) => {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
     }
 })
-article.get("/article/english/tech",async (req, res) => {
+article.get("/article/english/tech", async (req, res) => {
     try {
         const result = await scrapeEnglishTech();
         res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
@@ -66,6 +67,7 @@ article.post("/article/:articleId/user/:userId/comments", isAuthenticated, comme
 article.get("/article/:articleId/comments", getAllComments)
 
 article.get("/article/englishnews", getEnglish)
+article.get("/article/englishtech", getEnglishTech)
 article.get("/article/frenchnews", getFrench)
 article.get("/article/spanishnews", getSpanish)
 article.get("/article/hindinews", getHindi)

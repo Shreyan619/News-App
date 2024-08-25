@@ -29,8 +29,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  margin-bottom: 20px;
 }
-
 .large-article {
   width: 80%;
   height: 30%;
@@ -142,4 +142,9 @@ a {
 
 .slick-next {
   right: 0;
+}
+/* hr {
+  height: 10px;
+} */
+.Tech {
 }

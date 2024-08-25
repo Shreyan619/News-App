@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { englishArticle } from "../models/english.model.js";
+import { EnglishTech } from "../models/englishTech.model.js";
 
 
 export const scrapeEnglishTech = asyncHandler(async () => {
@@ -95,11 +95,11 @@ export const scrapeEnglishTech = asyncHandler(async () => {
                             image: articleImage,
                         };
                         // console.log(articleData)
-                        const existingArticle = await englishArticle.findOne({ link: articleData.link })
+                        const existingArticle = await EnglishTech.findOne({ link: articleData.link })
 
                         if (!existingArticle) {
 
-                            const newArticle = new englishArticle(articleData)
+                            const newArticle = new EnglishTech(articleData)
                             await newArticle.save()
                             // console.log('Saved article:', articleData);
                             scrapedData.push(articleData)

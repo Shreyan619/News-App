@@ -7,6 +7,7 @@ import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { comment } from "../models/comment.model.js";
 import mongoose from "mongoose";
+import { EnglishTech } from "../models/englishTech.model.js";
 
 const articleModels = {
     Englisharticle: englishArticle,
@@ -174,6 +175,23 @@ export const getFrench = asyncHandler(async (req, res) => {
 export const getHindi = asyncHandler(async (req, res) => {
     try {
         const articles = await hindiArticle.find({})
+
+        if (articles.length === 0) {
+            return res.status(404)
+                .json(new apiResponse(404, 'No articles found'))
+        }
+
+        res.status(200)
+            .json(new apiResponse(200, 'Articles retrieved successfully', articles))
+    } catch (error) {
+        console.error(error)
+        throw new errorHandler(500, 'Error retrieving articles', error.message)
+    }
+})
+
+export const getEnglishTech=asyncHandler(async(req,res)=>{
+    try {
+        const articles = await EnglishTech.find({})
 
         if (articles.length === 0) {
             return res.status(404)

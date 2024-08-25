@@ -84,7 +84,7 @@ a {
   align-items: flex-start;
   background-color: #d6d4d4;
   border-radius: 20px;
-  box-shadow: -5px -5px 10px;
+  box-shadow: -5px -5px 10px #adaaaa;
 }
 
 .small-article {

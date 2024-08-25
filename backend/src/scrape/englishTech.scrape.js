@@ -1,14 +1,10 @@
-// english newshttps://abcnews.go.com/Live
-
 import puppeteer from "puppeteer";
-import { apiResponse } from "../utils/apiResponse.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { englishArticle } from "../models/english.model.js";
 
 
-
-export const scrapeEnglish = asyncHandler(async () => {
+export const scrapeEnglishTech = asyncHandler(async () => {
     try {
         const browser = await puppeteer.launch({
             headless: true,
@@ -17,44 +13,47 @@ export const scrapeEnglish = asyncHandler(async () => {
 
         const page = await browser.newPage();
         page.setDefaultNavigationTimeout(0);
-        await page.goto('https://abcnews.go.com/Live', { waitUntil: 'networkidle2' });
+        await page.goto('https://abcnews.go.com/Technology', { waitUntil: 'networkidle2' });
 
-        const containerSelector = "#bandlist-component > div:nth-child(3)"
+        const containerSelector = "#bandlist-component > div.band__articleroll.band"
 
         const selectors = [
             {
-                title: "li:nth-child(2) > a > h3 > span",
-                link: "li:nth-child(2) > a",
-                image: "li:nth-child(2) > a > div > figure > div.Image__Wrapper.aspect-ratio--child > img",
+                title: "section:nth-child(1) > div.ContentRoll__Headline > h2",
+                link: "section:nth-child(1) > div.ContentRoll__Headline > h2 > a",
+                image: "section:nth-child(1) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
+                description:"section:nth-child(1) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
             {
-                title: "li:nth-child(3) > a > h3 > span",
-                link: "li:nth-child(3) > a",
-                image: "li:nth-child(3) > a > div > figure > div.Image__Wrapper.aspect-ratio--child > img",
+                title: "section:nth-child(2) > div.ContentRoll__Headline > h2",
+                link: "section:nth-child(2) > div.ContentRoll__Headline > h2 > a",
+                image: "section:nth-child(2) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
+                description:"section:nth-child(2) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
             {
-                title: "li:nth-child(4) > a > h3 > span",
-                link: "li:nth-child(4) > a",
-                image: "li:nth-child(4) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
+                title: "section:nth-child(3) > div.ContentRoll__Headline > h2",
+                link: "section:nth-child(3) > div.ContentRoll__Headline > h2 > a",
+                image: "section:nth-child(3) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
+                description:"section:nth-child(3) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
             {
-                title: "li:nth-child(5) > a > h3 > span",
-                link: "li:nth-child(5) > a",
-                image: "li:nth-child(5) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
+                title: "section:nth-child(4) > div.ContentRoll__Headline > h2",
+                link: "section:nth-child(4) > div.ContentRoll__Headline > h2 > a",
+                image: "section:nth-child(4) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
+                description:"section:nth-child(4) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
+
             },
             {
-                title: "li:nth-child(6) > a > h3 > span",
-                link: "li:nth-child(6) > a",
-                image: "li:nth-child(6) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
+                title: "section:nth-child(5) > div.ContentRoll__Headline > h2",
+                link: "section:nth-child(5) > div.ContentRoll__Headline > h2 > a",
+                image: "section:nth-child(5) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
+                description:"section:nth-child(5) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
+
             },
-            {
-                title: "li:nth-child(7) > a > h3 > span",
-                link: "li:nth-child(7) > a",
-                image: "li:nth-child(7) > a > div.MediaPlaceholder.relative.MediaPlaceholder--16x9.cursor-pointer.MediaPlaceholder--button-hover.VideoTile__Media > figure > div.Image__Wrapper.aspect-ratio--child > img",
-            },
+           
         ];
 
         const scrapedData = []
@@ -117,6 +116,7 @@ export const scrapeEnglish = asyncHandler(async () => {
                 }
             }
         }
+
         // console.log('Scraped Data:', scrapedData)
         await browser.close();
         return scrapedData

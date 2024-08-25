@@ -15,6 +15,7 @@ import {
     search
 } from "../controller/article.js"
 import { isAuthenticated } from "../middleware/auth.js"
+import { scrapeEnglishTech } from "../scrape/englishTech.scrape.js"
 
 const article = Router()
 
@@ -43,6 +44,15 @@ article.get("/article/france", async (req, res) => {
 article.get("/article/english", async (req, res) => {
     try {
         const result = await scrapeEnglish();
+        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        // console.log('Result from scrapeEnglish:', result)
+    } catch (error) {
+        res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
+    }
+})
+article.get("/article/english/tech",async (req, res) => {
+    try {
+        const result = await scrapeEnglishTech();
         res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
         // console.log('Result from scrapeEnglish:', result)
     } catch (error) {

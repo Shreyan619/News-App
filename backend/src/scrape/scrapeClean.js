@@ -10,6 +10,7 @@ import { hindiArticle } from "../models/hindi.model.js"
 import { errorHandler } from "../utils/errorHandler.js"
 import { moveBookmarkedArticlesToBookmarkModel } from "../controller/user.js"
 import { getEnglish } from "../controller/article.js"
+import { scrapeEnglishTech } from "./englishTech.scrape.js"
 
 
 // delete old articles
@@ -35,7 +36,7 @@ const deleteOldArticles = async (req, res) => {
     }
 }
 
-cron.schedule("*/5 * * * *", async () => {
+cron.schedule("*/10 * * * *", async () => {
     console.log('Running scheduled task for scraping and cleaning')
 
     try {
@@ -45,6 +46,7 @@ cron.schedule("*/5 * * * *", async () => {
         await scrapeEl();
         await scrapeFrance();
         await scrapeEnglish();
+        await scrapeEnglishTech()
 
         console.log("Scraping and cleaning completed successfully")
     } catch (error) {

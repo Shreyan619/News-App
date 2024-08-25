@@ -53,15 +53,28 @@ const englishNews = () => {
             <div className='small-articles'>
               <Slider {...settings}>
                 {articles.slice(1, 6).map((article, index) => (
-                  <a href={article.link} target='_blank' rel='noopener noreferrer'>
-                    <div className='small-article' key={index}>
-                      <p className='article-title-small'>{article.title}</p>
-                      {/* <p className='article-time-small'>{formatTime(article.time)}</p> */}
-                      <img src={article.image} alt={article.title} className='article-image-small' />
-                    </div>
-                  </a>
+                  <div key={article.id || index} className='small-article-wrapper'>
+                    <a href={article.link} target='_blank' rel='noopener noreferrer'>
+                      <div className='small-article' key={article.id}>
+                        <p className='article-title-small'>{article.title}</p>
+                        {/* <p className='article-time-small'>{formatTime(article.time)}</p> */}
+                        <img src={article.image} alt={article.title} className='article-image-small' />
+                      </div>
+                    </a>
+                  </div>
                 ))}
               </Slider>
+            </div>
+
+            <div className='rest-articles'>
+              {articles.slice(6).map((article, index) => (
+                <div key={article.id || index} className='rest-article'>
+                  <a href={article.link} target='_blank' rel='noopener noreferrer'>
+                    <h3 className='article-title'>{article.title}</h3>
+                    <img src={article.image} alt={article.title} className='article-image' />
+                  </a>
+                </div>
+              ))}
             </div>
           </>
         )}

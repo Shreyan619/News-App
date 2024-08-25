@@ -29,61 +29,76 @@ const englishNews = () => {
   if (!articles.length && !techArticles.length) return <p>No articles available</p>
 
   const settings = {
-    dots: true,
+    // dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    vertical: true, // Enable vertical scrolling
+    vertical: true,
     autoplay: true,
     autoplaySpeed: 3000,
     verticalSwiping: true
   }
+  const techSettings = {
+    // dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: true
+  }
 
   return (
-    <section className='english'>
-      <header className='header'>English News</header>
-      <hr />
-      <h2 className='top-stories'>Top Stories</h2>
-      <div className='articles-container'>
-        {articles.length > 0 && (
-          <>
-            <div className='large-article'>
-              <a href={articles[0].link} target='_blank' rel='noopener noreferrer'>
-                <h2 className='article-title-large'>{articles[0].title}</h2>
-                <img src={articles[0].image} alt={articles[0].title} className='article-image-large' />
+    <>
+      <section className='english'>
+        <header className='header'>English News</header>
+        <hr />
+        <h2 className='top-stories'>Top Stories</h2>
+        <div className='articles-container'>
+          {articles.length > 0 && (
+            <>
+              <div className='large-article'>
+                <a href={articles[0].link} target='_blank' rel='noopener noreferrer'>
+                  <h2 className='article-title-large'>{articles[0].title}</h2>
+                  <img src={articles[0].image} alt={articles[0].title} className='article-image-large' />
+                </a>
+              </div>
+              <div className='small-articles'>
+                <Slider {...settings}>
+                  {articles.slice(1, 6).map((article, index) => (
+                    <div key={article.id || index} className='small-article-wrapper'>
+                      <a href={article.link} target='_blank' rel='noopener noreferrer'>
+                        <div className='small-article'>
+                          <p className='article-title-small'>{article.title}</p>
+                          <img src={article.image} alt={article.title} className='article-image-small' />
+                        </div>
+                      </a>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+      <hr className='low-Tech' />
+      <section className='Tech'>
+        <header className='header-tech'>Tech News</header>
+        <Slider {...techSettings}>
+          {techArticles.map((article, index) => (
+            <div key={article.id || index} className='Tech-news'>
+              <a href={article.link} target='_blank' rel='noopener noreferrer'>
+                <h3 className='article-title-Tech'>{article.title}</h3>
+                <img src={article.image} alt={article.title} className='article-image-Tech' />
+                <h5 className='article-description-Tech'>{article.description}</h5>
               </a>
             </div>
-            <div className='small-articles'>
-              <Slider {...settings}>
-                {articles.slice(1, 6).map((article, index) => (
-                  <div key={article.id || index} className='small-article-wrapper'>
-                    <a href={article.link} target='_blank' rel='noopener noreferrer'>
-                      <div className='small-article'>
-                        <p className='article-title-small'>{article.title}</p>
-                        <img src={article.image} alt={article.title} className='article-image-small' />
-                      </div>
-                    </a>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </>
-        )}
-      </div>
-      <hr />
-      <div className='Tech'>
-        {techArticles.map((article, index) => (
-          <div key={article.id || index} className='Tech-news'>
-            <a href={article.link} target='_blank' rel='noopener noreferrer'>
-              <h3 className='article-title-Tech'>{article.title}</h3>
-              <h5 className='article-description-Tech'>{article.description}</h5>
-              <img src={article.image} alt={article.title} className='article-image-Tech' />
-            </a>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </Slider>
+      </section>
+    </>
   )
 }
 

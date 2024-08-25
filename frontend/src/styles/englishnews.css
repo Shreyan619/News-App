@@ -99,11 +99,11 @@ a {
   border-radius: 10px;
   object-fit: cover;
   margin-left: 20px;
-  box-shadow: 0px 5px 5px #cfcccc;
+  box-shadow: 0px 5px 10px #6d6969;
+  transition: filter 0.3s ease;
 }
 .article-image-small:hover {
-  filter: brightness(1.1);
-  transition: filter 0.3s ease;
+  filter: brightness(80%);
 }
 
 .article-title-small {
@@ -115,10 +115,10 @@ a {
   color: #333;
   text-align: left;
   flex-grow: 1;
+  transition: text-decoration 0.3s ease;
 }
 .article-title-small:hover {
   text-decoration: underline #0a44c0;
-  transition: text-decoration 0.3s ease;
 }
 .article-time-large {
   color: #fd2c25;
@@ -130,7 +130,7 @@ a {
 .slick-prev:before,
 .slick-next:before {
   color: black;
-  font-size: 30px; /* Adjust size if necessary */
+  font-size: 30px;
 }
 .slick-prev,
 .slick-next {
@@ -143,8 +143,69 @@ a {
 .slick-next {
   right: 0;
 }
-/* hr {
-  height: 10px;
-} */
+.slick-prev {
+  left: 0;
+}
+
+.low-Tech {
+  margin: 0vmax 0vmax 1vmax;
+  box-shadow: 0px 5px 10px #cfcccc;
+}
 .Tech {
+  background-color: white;
+  padding: 1vmax;
+  width: 100%;
+  margin: auto;
+}
+.header-tech {
+  margin-left: 5vmax;
+  font-size: 3vmax;
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.Tech-news {
+  flex: 1 1 calc(33.33% - 20px); /* Each article will take up approximately one-third of the container width */
+  box-sizing: border-box;
+  padding: 1vmax 1.5vmax;
+}
+.article-title-Tech {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  transition: text-decoration 0.3s ease;
+}
+
+.article-title-Tech:hover {
+  text-decoration: underline #ce4949;
+}
+
+.article-description-Tech {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #898282;
+  font-family: "Lato", sans-serif;
+  font-weight: 450;
+  font-style: normal;
+  transition: text-decoration 0.3s ease;
+}
+.article-description-Tech:hover {
+  text-decoration: underline #6d6969;
+}
+
+.article-image-Tech {
+  max-width: 100%;
+  width: 97%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px #a39b9b;
+  margin-bottom: 5px;
+  transition: filter 0.3s ease;
+}
+.article-image-Tech:hover {
+  filter: brightness(80%);
 }

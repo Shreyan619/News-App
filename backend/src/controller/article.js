@@ -189,7 +189,7 @@ export const getHindi = asyncHandler(async (req, res) => {
     }
 })
 
-export const getEnglishTech=asyncHandler(async(req,res)=>{
+export const getEnglishTech = asyncHandler(async (req, res) => {
     try {
         const articles = await EnglishTech.find({})
 

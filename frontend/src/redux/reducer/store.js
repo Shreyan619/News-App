@@ -1,14 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { userapi } from '../api/userapi'
 import { englishapi } from '../api/englishapi'
+import { franceapi } from '../api/franceapi'
 
 export const store = configureStore({
     reducer: {
         [userapi.reducerPath]: userapi.reducer,
-        [englishapi.reducerPath]: englishapi.reducer
+        [englishapi.reducerPath]: englishapi.reducer,
+        [franceapi.reducerPath]: franceapi.reducer
     },
     middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(),
     userapi.middleware,
-    englishapi.middleware
+    englishapi.middleware,
+    franceapi.middleware
     ]
 })

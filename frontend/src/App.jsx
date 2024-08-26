@@ -6,6 +6,7 @@ import Login from './pages/User profile/Login'
 import Footer from './pages/Home/Footer'
 import Signup from './pages/User profile/Signup'
 import EnglishNews from './pages/articles/englishNews'
+import Francenews from './pages/articles/FrenchNews'
 import './index.css'
 
 
@@ -24,6 +25,7 @@ const App = () => {
               <Route path='/signup' element={<Signup />} />
 
               <Route path='/article/english' element={<EnglishNews />} />
+              <Route path='/article/france' element={<Francenews />} />
             </Routes>
           </div>
           <Footer />

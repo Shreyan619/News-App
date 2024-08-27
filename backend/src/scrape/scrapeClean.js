@@ -12,6 +12,7 @@ import { moveBookmarkedArticlesToBookmarkModel } from "../controller/user.js"
 import { getEnglish } from "../controller/article.js"
 import { scrapeEnglishTech } from "./eng/englishTech.scrape.js"
 import { scrapeFranceMore } from "./fra/france.more.js"
+import { scrapeElSport } from "./spa/el.sport.js"
 
 
 // delete old articles
@@ -49,6 +50,7 @@ cron.schedule("*/1 * * * *", async () => {
         await scrapeEnglish();
         await scrapeEnglishTech()
         await scrapeFranceMore()
+        await scrapeElSport()
 
         console.log("Scraping and cleaning completed successfully")
     } catch (error) {

@@ -3,11 +3,11 @@
 import puppeteer from "puppeteer";
 import { errorHandler } from "../../utils/errorHandler.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
-import { spanishArticle } from "../../models/spanish.model.js"
+import { SpainSport } from "../../models/spanishSport.model.js";
 
 
 
-export const scrapeEl = asyncHandler(async (req, res) => {
+export const scrapeElSport = asyncHandler(async (req, res) => {
     try {
         const browser = await puppeteer.launch({
             headless: true,
@@ -16,7 +16,7 @@ export const scrapeEl = asyncHandler(async (req, res) => {
 
         const page = await browser.newPage();
         page.setDefaultNavigationTimeout(0);
-        await page.goto('https://www.deutschland.de/de/news', { waitUntil: 'networkidle2' });
+        await page.goto('https://www.deutschland.de/de/topic/leben', { waitUntil: 'networkidle2' });
 
         const containerSelector = "#main";
 
@@ -91,11 +91,11 @@ export const scrapeEl = asyncHandler(async (req, res) => {
                             image: articleImage,
                         };
 
-                        const existingArticle = await spanishArticle.findOne({ link: articleData.link })
+                        const existingArticle = await SpainSport.findOne({ link: articleData.link })
 
                         if (!existingArticle) {
 
-                            const newArticle = new spanishArticle(articleData)
+                            const newArticle = new SpainSport(articleData)
                             await newArticle.save()
                             scrapedData.push(articleData)
 

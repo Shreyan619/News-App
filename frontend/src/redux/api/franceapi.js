@@ -10,8 +10,15 @@ export const franceapi = createApi({
                 method: 'GET',
                 body: france
             })
+        }),
+        scrapeFranceTech: build.query({
+            query: (france) => ({
+                url: '/article/frenchtech',
+                method: 'GET',
+                body: france
+            })
         })
     })
 })
 
-export const { useScrapeFranceQuery } = franceapi
+export const { useScrapeFranceQuery, useScrapeFranceTechQuery } = franceapi

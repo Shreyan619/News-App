@@ -10,14 +10,17 @@ import {
     getAllComments,
     getEnglish,
     getEnglishTech,
+    getFranceMore,
     getFrench,
     getHindi,
+    getSpainSport,
     getSpanish,
     search
 } from "../controller/article.js"
 import { isAuthenticated } from "../middleware/auth.js"
 import { scrapeEnglishTech } from "../scrape/eng/englishTech.scrape.js"
 import { scrapeFranceMore } from "../scrape/fra/france.more.js"
+import { scrapeElSport } from "../scrape/spa/el.sport.js"
 
 const article = Router()
 
@@ -62,6 +65,15 @@ article.get("/article/english/tech", async (req, res) => {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
     }
 })
+article.get("/article/spain/sport", async (req, res) => {
+    try {
+        const result = await scrapeElSport();
+        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        // console.log('Result from scrapeEnglish:', result)
+    } catch (error) {
+        res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
+    }
+})
 article.get("/article/france/more", async (req, res) => {
     try {
         const result = await scrapeFranceMore();
@@ -80,7 +92,9 @@ article.get("/article/:articleId/comments", getAllComments)
 article.get("/article/englishnews", getEnglish)
 article.get("/article/englishtech", getEnglishTech)
 article.get("/article/frenchnews", getFrench)
+article.get("/article/frenchtech", getFranceMore)
 article.get("/article/spanishnews", getSpanish)
+article.get("/article/spanishsport", getSpainSport)
 article.get("/article/hindinews", getHindi)
 
 

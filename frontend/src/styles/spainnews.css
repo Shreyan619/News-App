@@ -1,12 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
-.france {
+.spain {
   padding: 1vmax;
   width: 100%;
   margin: auto;
   background-color: #11133d;
 }
-.header-france {
+.header-spain {
   padding: 1vmax;
   font-size: 2rem;
   /* margin-bottom: 20px; */
@@ -27,13 +27,13 @@
   color: #eeeef5;
 }
 
-.articles-container-fr {
+.articles-container-sp {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 20px;
 }
-.large-article-fr {
+.large-article-sp {
   width: 95%;
   height: 30%;
   grid-column: 1 / 2;
@@ -47,20 +47,20 @@
   justify-content: space-between;
   align-items: center;
 } */
-.article-image-large-fr {
-  width: 65%;
-  height: 50%;
+.article-image-large-sp {
+  width: 100%;
+  height: 70%;
   margin-top: 20px;
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0px 5px 10px #585aaa;
 }
-.article-image-large-fr:hover {
+.article-image-large-sp:hover {
   filter: brightness(1.1);
   transition: filter 0.3s ease;
 }
 
-.article-title-large-fr {
+.article-title-large-sp {
   width: 100%;
   font-size: 2vmax;
   margin-top: 10px;
@@ -69,11 +69,11 @@
   font-style: normal;
   color: #eeeef5;
 }
-.article-title-large-fr:hover {
+.article-title-large-sp:hover {
   text-decoration: underline #0a44c0;
   transition: text-decoration 0.3s ease;
 }
-.article-large-description-Tech-fr {
+.article-large-description-Tech-sp {
   font-size: 1.2vmax;
   width: 80%;
   margin-top: 30px;
@@ -82,7 +82,7 @@
   font-style: normal;
   color: #c5c5cc;
 }
-.article-large-description-Tech-fr:hover{
+.article-large-description-Tech-sp:hover{
   text-decoration:underline #c5c5cc;
 }
 
@@ -90,7 +90,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
-.small-articles-fr {
+.small-articles-sp {
   grid-column: 2 / 3;
   display: flex;
   padding: 10px 5px;
@@ -105,7 +105,7 @@ a {
   display: flex;
   flex-direction: column;
 }
-.small-article-fr {
+.small-article-sp {
   display: flex;
   margin-bottom: 50px;
   gap: 10px;
@@ -117,20 +117,20 @@ a {
   flex-direction: column;
   flex: 1;
 }
-.article-image-small-fr {
-  width: 35%;
-  height: 250px;
+.article-image-small-sp {
+  width: 200px;
+  height: 200px;
   border-radius: 10px;
   object-fit: cover;
   margin-left: 20px;
   box-shadow: 0px 5px 10px #585aaa;
   transition: filter 0.3s ease;
 }
-.article-image-small-fr:hover {
+.article-image-small-sp:hover {
   filter: brightness(80%);
 }
 
-.article-title-small-fr {
+.article-title-small-sp {
   padding: 1vmax 1vmax;
   font-size: 1.5vmax;
   font-family: "Lato", sans-serif;
@@ -140,11 +140,11 @@ a {
   text-align: left;
   transition: text-decoration 0.3s ease;
 }
-.article-title-small-fr:hover {
+.article-title-small-sp:hover {
   text-decoration: underline #0a44c0;
 }
 
-.article-small-description-Tech-fr {
+.article-small-description-Tech-sp {
   font-size: 0.8vmax;
   margin: 20px;
   color: #c5c5cc;
@@ -152,7 +152,7 @@ a {
   font-weight: 400;
   font-style: normal;
 }
-.article-small-description-Tech-fr:hover {
+.article-small-description-Tech-sp:hover {
   text-decoration: underline #c5c5cc;
 }
 /* .article-time-large {
@@ -182,17 +182,17 @@ a {
   left: 0;
 } */
 
-.low-Tech-fr {
+.low-Tech-sp {
   margin: 0vmax 0vmax 1vmax;
   box-shadow: 0px 5px 10px #cfcccc;
 }
-.Tech-fr {
+.Tech-sp {
   background-color: white;
   padding: 1vmax;
   width: 100%;
   margin: auto;
 }
-.header-tech-fr {
+.header-tech-sp {
   margin-left: 5vmax;
   font-size: 3vmax;
   font-family: "Lato", sans-serif;
@@ -200,13 +200,13 @@ a {
   font-style: normal;
 }
 
-.Tech-news-fr {
-  flex: 1 1 calc(33.33% - 20px); /* Each article will take up approximately one-third of the container width */
+.Tech-news-sp {
+  flex: 1 1 calc(33% - 20px); /* Each article will take up approximately one-third of the container width */
   box-sizing: border-box;
   padding: 1vmax 1.5vmax;
   height: 400px;
 }
-.article-title-Tech-fr {
+.article-title-Tech-sp {
   font-size: 1.1rem;
   margin-bottom: 20px;
   font-family: "Lato", sans-serif;
@@ -215,11 +215,11 @@ a {
   transition: text-decoration 0.3s ease;
 }
 
-.article-title-Tech-fr:hover {
+.article-title-Tech-sp:hover {
   text-decoration: underline #ce4949;
 }
 
-.article-description-Tech-fr {
+.article-description-Tech-sp {
   font-size: 0.9rem;
   margin-bottom: 10px;
   color: #898282;
@@ -228,19 +228,19 @@ a {
   font-style: normal;
   transition: text-decoration 0.3s ease;
 }
-.article-description-Tech-fr:hover {
+.article-description-Tech-sp:hover {
   text-decoration: underline #6d6969;
 }
 
-.article-image-Tech-fr {
-  width: 97%;
-  height: 50%;
+.article-image-Tech-sp {
+  width: 90%;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px;
   box-shadow: 0px 5px 10px #a39b9b;
   margin-bottom: 5px;
   transition: filter 0.3s ease;
 }
-.article-image-Tech-fr:hover {
+.article-image-Tech-sp:hover {
   filter: brightness(80%);
 }

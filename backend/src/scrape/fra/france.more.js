@@ -1,14 +1,13 @@
 // french news https://www.france24.com/fr/
 
 import puppeteer from "puppeteer";
-import { apiResponse } from "../utils/apiResponse.js";
-import { errorHandler } from "../utils/errorHandler.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { frenchArticle } from "../models/french.model.js"
+import { errorHandler } from "../../utils/errorHandler.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { frenchArticle } from "../../models/french.model.js"
 
 
 
-export const scrapeFrance = asyncHandler(async () => {
+export const scrapeFranceMore = asyncHandler(async () => {
     try {
         const browser = await puppeteer.launch({
             headless: true,
@@ -17,49 +16,35 @@ export const scrapeFrance = asyncHandler(async () => {
 
         const page = await browser.newPage();
         page.setDefaultNavigationTimeout(0);
-        await page.goto('https://www.france24.com/fr/', { waitUntil: 'networkidle2' });
+        await page.goto('https://www.lexpress.fr/economie/', { waitUntil: 'networkidle2' });
 
-        const containerSelector = "#main-content > div:nth-child(2) > div";
+        const containerSelector = "#fusion-app > div.sous-home";
 
         const selectors = [
             {
-                title: "div.article__title > a > h2",
-                link: "div.article__title > a",
-                image: "figure > picture > img",
-
+                title: "article:nth-child(1) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a > h2",
+                link: "article:nth-child(1) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a",
+                image: "article:nth-child(1) > div.thumbnail__image.link--unstyled > a > picture > img",
+                description: "article:nth-child(1) > div.thumbnail__text__wrapper > div > div.thumbnail__description"
             },
             {
-                title: "div:nth-child(2) > div > div > div > div.article__title > a > h2",
-                link: "div:nth-child(2) > div > div > div > div.article__title > a",
-                image: "div:nth-child(2) > div > div > a > figure > picture > img",
-
+                title: "article:nth-child(2) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a > h2",
+                link: "article:nth-child(2) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a",
+                image: "article:nth-child(2) > div.thumbnail__image.link--unstyled > a > picture > img",
+                description: "article:nth-child(2) > div.thumbnail__text__wrapper > div > div.thumbnail__description"
             },
             {
-                title: "div:nth-child(3) > div > div > div > div.article__title > a > h2",
-                link: "div:nth-child(3) > div > div > div > div.article__title > a",
-                image: "div:nth-child(3) > div > div > a > figure > picture > img",
-
+                title: "article:nth-child(3) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a > h2",
+                link: "article:nth-child(3) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a",
+                image: "article:nth-child(3) > div.thumbnail__image.link--unstyled > a > picture > img",
+                description: "article:nth-child(3) > div.thumbnail__text__wrapper > div > div.thumbnail__description"
             },
             {
-                title: "div:nth-child(4) > div > div > div > div.article__title > a > h2",
-                link: "div:nth-child(4) > div > div > div > div.article__title > a",
-                image: "div:nth-child(4) > div > div > a > figure > picture > img",
-
+                title: "article:nth-child(6) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a > h2",
+                link: "article:nth-child(6) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a",
+                image: "article:nth-child(6) > div.thumbnail__image.link--unstyled > a > picture > img",
+                description: "article:nth-child(6) > div.thumbnail__text__wrapper > div > div.thumbnail__description"
             },
-            {
-                title: "div:nth-child(5) > div > div > div > div.article__title > a > h2",
-                link: "div:nth-child(5) > div > div > div > div.article__title > a",
-                image: "#div:nth-child(5) > div > div > a > figure > picture > img",
-
-            },
-            {
-                title: "div:nth-child(6) > div > div > div > div.article__title > a > h2",
-                link: "div:nth-child(6) > div > div > div > div.article__title > a",
-                image: "div:nth-child(6) > div > div > a > figure > picture > img",
-
-            },
-
-
 
         ];
 

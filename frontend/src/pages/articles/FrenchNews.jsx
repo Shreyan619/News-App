@@ -8,7 +8,7 @@ import "../../styles/francenews.css"
 
 const francenews = () => {
     const { data: response, error, isLoading } = useScrapeFranceQuery()
-    
+
 
     const articles = response?.data || []
     if (articles) {
@@ -34,26 +34,26 @@ const francenews = () => {
     return (
         <>
             <section className='france'>
-                <header className='header'>English News</header>
+                <header className='header-france'>France News</header>
                 <hr />
-                <h2 className='top-stories'>Top Stories</h2>
-                <div className='articles-container'>
+                <h2 className='top'>POLITIQUE</h2>
+                <div className='articles-container-fr'>
                     {articles.length > 0 && (
                         <>
-                            <div className='large-article'>
+                            <div className='large-article-fr'>
                                 <a href={articles[0].link} target='_blank' rel='noopener noreferrer'>
-                                    <h2 className='article-title-large'>{articles[0].title}</h2>
-                                    <img src={articles[0].image} alt={articles[0].title} className='article-image-large' />
+                                    <h2 className='article-title-large-fr'>{articles[0].title}</h2>
+                                    <img src={articles[0].image} alt={articles[0].title} className='article-image-large-fr' />
                                 </a>
                             </div>
-                            <div className='small-articles'>
+                            <div className='small-articles-fr'>
                                 <Slider {...settings}>
                                     {articles.slice(1, 6).map((article, index) => (
                                         <div key={article.id || index} className='small-article-wrapper'>
                                             <a href={article.link} target='_blank' rel='noopener noreferrer'>
-                                                <div className='small-article'>
-                                                    <p className='article-title-small'>{article.title}</p>
-                                                    <img src={article.image} alt={article.title} className='article-image-small' />
+                                                <div className='small-article-fr'>
+                                                    <p className='article-title-small-fr'>{article.title}</p>
+                                                    <img src={article.image} alt={article.title} className='article-image-small-fr' />
                                                 </div>
                                             </a>
                                         </div>

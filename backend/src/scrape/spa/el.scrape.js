@@ -1,10 +1,10 @@
 // spanish news
 
 import puppeteer from "puppeteer";
-import { apiResponse } from "../utils/apiResponse.js";
-import { errorHandler } from "../utils/errorHandler.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { spanishArticle } from "../models/spanish.model.js"
+import { apiResponse } from "../../utils/apiResponse.js";
+import { errorHandler } from "../../utils/errorHandler.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { spanishArticle } from "../../models/spanish.model.js"
 
 
 

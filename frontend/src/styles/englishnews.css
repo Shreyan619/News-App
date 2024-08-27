@@ -4,12 +4,12 @@
   padding: 1vmax;
   width: 100%;
   margin: auto;
-  background-color: #f3f3ef;
+  background-color: #11133d;
 }
 .header {
   padding: 1vmax;
   font-size: 2rem;
-  /* margin-bottom: 20px; */
+  color:#eeeef5;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -19,7 +19,7 @@
 .top-stories {
   padding: 1vmax 5vmax;
   font-size: 2vmax;
-  /* margin-bottom: 1vmax; */
+  color:#eeeef5;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
   font-style: normal;
@@ -40,17 +40,17 @@
   /* justify-content: space-between; */
   padding: 1vmax;
 }
-.article-header {
+/* .article-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 .article-image-large {
   width: 100%;
   height: auto;
   border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0px 5px 5px #cfcccc;
+  box-shadow: 0px 5px 5px #47498a;
 }
 .article-image-large:hover {
   filter: brightness(1.1);
@@ -64,7 +64,7 @@
   font-family: "Lato", sans-serif;
   font-weight: 600;
   font-style: normal;
-  color: #333000;
+  color: #eeeef5;
 }
 .article-title-large:hover {
   text-decoration: underline #0a44c0;
@@ -82,9 +82,9 @@ a {
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
-  background-color: #d6d4d4;
+  background-color: #4145b4;
   border-radius: 20px;
-  box-shadow: -5px -5px 10px #adaaaa;
+  box-shadow: -5px -5px 10px #4c4e97;
 }
 
 .small-article {
@@ -99,7 +99,7 @@ a {
   border-radius: 10px;
   object-fit: cover;
   margin-left: 20px;
-  box-shadow: 0px 5px 10px #6d6969;
+  box-shadow: 0px 5px 10px #585aaa;
   transition: filter 0.3s ease;
 }
 .article-image-small:hover {
@@ -112,7 +112,7 @@ a {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: #333;
+  color: #eeeef5;
   text-align: left;
   flex-grow: 1;
   transition: text-decoration 0.3s ease;
@@ -172,7 +172,7 @@ a {
 }
 .article-title-Tech {
   font-size: 1.1rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-family: "Lato", sans-serif;
   font-weight: 500;
   font-style: normal;

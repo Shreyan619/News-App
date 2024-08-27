@@ -1,10 +1,10 @@
 // hindi news
 
 import puppeteer from "puppeteer";
-import { hindiArticle } from "../models/hindi.model.js"
-import { apiResponse } from "../utils/apiResponse.js";
-import { errorHandler } from "../utils/errorHandler.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { hindiArticle } from "../../models/hindi.model.js"
+import { apiResponse } from "../../utils/apiResponse.js";
+import { errorHandler } from "../../utils/errorHandler.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
 
 
 

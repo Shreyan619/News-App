@@ -1,9 +1,9 @@
 import { Router } from "express"
-import { scrapeAajTak } from "../scrape/aajtak.scrape.js"
+import { scrapeAajTak } from "../scrape/hind/aajtak.scrape.js"
 import { apiResponse } from "../utils/apiResponse.js"
-import { scrapeEl } from "../scrape/el.scrape.js"
-import { scrapeFrance } from "../scrape/france24.scrape.js"
-import { scrapeEnglish } from "../scrape/english.scrape.js"
+import { scrapeEl } from "../scrape/spa/el.scrape.js"
+import { scrapeFrance } from "../scrape/fra/france24.scrape.js"
+import { scrapeEnglish } from "../scrape/eng/english.scrape.js"
 import {
     comments,
     getAllArticles,
@@ -16,7 +16,8 @@ import {
     search
 } from "../controller/article.js"
 import { isAuthenticated } from "../middleware/auth.js"
-import { scrapeEnglishTech } from "../scrape/englishTech.scrape.js"
+import { scrapeEnglishTech } from "../scrape/eng/englishTech.scrape.js"
+import { scrapeFranceMore } from "../scrape/fra/france.more.js"
 
 const article = Router()
 
@@ -51,9 +52,19 @@ article.get("/article/english", async (req, res) => {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
     }
 })
+
 article.get("/article/english/tech", async (req, res) => {
     try {
         const result = await scrapeEnglishTech();
+        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        // console.log('Result from scrapeEnglish:', result)
+    } catch (error) {
+        res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
+    }
+})
+article.get("/article/france/more", async (req, res) => {
+    try {
+        const result = await scrapeFranceMore();
         res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
         // console.log('Result from scrapeEnglish:', result)
     } catch (error) {

@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
-import { errorHandler } from "../utils/errorHandler.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { EnglishTech } from "../models/englishTech.model.js";
+import { errorHandler } from "../../utils/errorHandler.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { EnglishTech } from "../../models/englishTech.model.js";
 
 
 export const scrapeEnglishTech = asyncHandler(async () => {

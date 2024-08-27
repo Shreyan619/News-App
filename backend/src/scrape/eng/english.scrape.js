@@ -1,10 +1,10 @@
 // english newshttps://abcnews.go.com/Live
 
 import puppeteer from "puppeteer";
-import { apiResponse } from "../utils/apiResponse.js";
-import { errorHandler } from "../utils/errorHandler.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { englishArticle } from "../models/english.model.js";
+import { apiResponse } from "../../utils/apiResponse.js";
+import { errorHandler } from "../../utils/errorHandler.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { englishArticle } from "../../models/english.model.js";
 
 
 

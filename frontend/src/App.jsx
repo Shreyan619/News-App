@@ -7,7 +7,8 @@ import Footer from './pages/Home/Footer'
 import Signup from './pages/User profile/Signup'
 import EnglishNews from './pages/articles/englishNews'
 import Francenews from './pages/articles/FrenchNews'
-import  SpanisNews from "./pages/articles/SpanishNews"
+import  SpanishNews from "./pages/articles/SpanishNews"
+import  HindiNews from "./pages/articles/HindiNews"
 import './index.css'
 
 
@@ -27,7 +28,8 @@ const App = () => {
 
               <Route path='/article/english' element={<EnglishNews />} />
               <Route path='/article/france' element={<Francenews />} />
-              <Route path='/article/spain' element={<SpanisNews />} />
+              <Route path='/article/spain' element={<SpanishNews />} />
+              <Route path='/article/hindi' element={<HindiNews />} />
             </Routes>
           </div>
           <Footer />

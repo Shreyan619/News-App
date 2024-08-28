@@ -74,6 +74,7 @@ const francenews = () => {
                                                     <img src={article.image} alt={article.title} className='article-image-small-fr' />
                                                 </div>
                                             </a>
+                                            {index < articles.length - 2 && <hr />}
                                         </div>
                                     ))}
                                 </Slider>

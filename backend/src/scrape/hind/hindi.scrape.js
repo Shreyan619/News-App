@@ -1,13 +1,14 @@
-// spanish news
+// hindi news
 
 import puppeteer from "puppeteer";
 import { errorHandler } from "../../utils/errorHandler.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
-import { SpainSport } from "../../models/spanishSport.model.js";
+import { hindiBusiness } from "../../models/hindiMore.model.js";
 
 
 
-export const scrapeElSport = asyncHandler(async (req, res) => {
+
+export const scrapeHindi = asyncHandler(async (req, res) => {
     try {
         const browser = await puppeteer.launch({
             headless: true,
@@ -15,44 +16,49 @@ export const scrapeElSport = asyncHandler(async (req, res) => {
         });
 
         const page = await browser.newPage();
-        page.setDefaultNavigationTimeout(0);
-        await page.goto('https://www.deutschland.de/de/topic/leben', { waitUntil: 'networkidle2' });
+        await page.setDefaultNavigationTimeout(0);
+        await page.goto('https://www.aajtak.in/business', { waitUntil: 'networkidle2' });
 
-        const containerSelector = "#main";
+        const containerSelector = "div.content-area > div:nth-child(4)";
 
         const selectors = [
             {
-                title: "div:nth-child(1) > div > div > div.col.col-md-4 > a > div.article-teaser-big__headline",
-                link: "div:nth-child(1) > div > div > div.col.col-md-4 > a",
-                image: "div:nth-child(1) > div > div > div.col.col-md-8 > a > picture > img",
-                description: "div:nth-child(1) > div > div > div.col.col-md-4 > a > div.article-teaser-big__summary"
+                title: "li:nth-child(1) > a > div.text-area > h2",
+                link: "li:nth-child(1) > a",
+                image: "li:nth-child(1) > a > div.thumb > img",
+                // description: "div.left-story > div.hhm-stoy-left-body > a > div:nth-child(3) > p"
             },
             {
-                title: "div:nth-child(2) > div > div > div > a.teaser-small__content > div.teaser-small__headline",
-                link: "div:nth-child(2) > div > div > div > a.teaser-small__content",
-                image: "div:nth-child(2) > div > div > div > a.teaser-small__image > picture > img",
-                description: "div:nth-child(2) > div > div > div > a.teaser-small__content > div.teaser-small__summary"
+                title: "li:nth-child(2) > a > div.text-area > h2",
+                link: "li:nth-child(2) > a",
+                image: "li:nth-child(2) > a > div.thumb > img",
+                // description: "div.home-single-story > div.single_str > a > div.title > h3"
             },
             {
-                title: "div:nth-child(3) > div > div > div > a.teaser-small__content > div.teaser-small__headline",
-                link: "div:nth-child(3) > div > div > div > a.teaser-small__content",
-                image: "div:nth-child(3) > div > div > div > a.teaser-small__image > picture > img",
-                description: "div:nth-child(3) > div > div > div > a.teaser-small__content > div.teaser-small__summary"
+                title: "li:nth-child(3) > a > div.text-area > h2",
+                link: "li:nth-child(3) > a",
+                image: "li:nth-child(3) > a > div.thumb > img",
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
             {
-                title: "div:nth-child(4) > div > div > div > a.teaser-small__content > div.teaser-small__headline",
-                link: "div:nth-child(4) > div > div > div > a.teaser-small__content",
-                image: "div:nth-child(4) > div > div > div > a.teaser-small__image > picture > img",
-                description: "div:nth-child(4) > div > div > div > a.teaser-small__content > div.teaser-small__summary"
+                title: "li:nth-child(4) > a > div.text-area > h2",
+                link: "li:nth-child(4) > a",
+                image: "li:nth-child(4) > a > div.thumb > img",
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
             {
-                title: "div:nth-child(5) > div > div > div.col.col-md-4 > a > div.article-teaser-big__headline",
-                link: "div:nth-child(5) > div > div > div.col.col-md-4 > a",
-                image: "div:nth-child(5) > div > div > div.col.col-md-8 > a > picture > img",
-                description: "div:nth-child(5) > div > div > div.col.col-md-4 > a > div.article-teaser-big__summary"
+                title: "li:nth-child(5) > a > div.text-area > h2",
+                link: "li:nth-child(5) > a",
+                image: "li:nth-child(5) > a > div.thumb > img",
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
-
-
+            {
+                title: "li:nth-child(6) > a > div.text-area > h2",
+                link: "li:nth-child(6) > a",
+                image: "li:nth-child(6) > a > div.thumb > img",
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
+            },
+          
         ];
 
         const scrapedData = []
@@ -91,11 +97,12 @@ export const scrapeElSport = asyncHandler(async (req, res) => {
                             image: articleImage,
                         };
 
-                        const existingArticle = await SpainSport.findOne({ link: articleData.link })
+
+                        const existingArticle = await hindiBusiness.findOne({ link: articleData.link })
 
                         if (!existingArticle) {
 
-                            const newArticle = new SpainSport(articleData)
+                            const newArticle = new hindiBusiness(articleData)
                             await newArticle.save()
                             scrapedData.push(articleData)
 
@@ -103,10 +110,8 @@ export const scrapeElSport = asyncHandler(async (req, res) => {
 
                             // console.log(`Article already exists: ${articleData.link}`);
                             // throw new errorHandler(400,`Article already exists: ${articleData.link}`)
-
                         }
                     }
-
                 } catch (innerError) {
                     console.error("Error evaluating element:", innerError);
                 }
@@ -122,5 +127,6 @@ export const scrapeElSport = asyncHandler(async (req, res) => {
         throw new errorHandler(501, "Error during scraping")
     }
 });
+
 
 

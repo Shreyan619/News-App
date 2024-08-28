@@ -2,7 +2,6 @@
 
 import puppeteer from "puppeteer";
 import { hindiArticle } from "../../models/hindi.model.js"
-import { apiResponse } from "../../utils/apiResponse.js";
 import { errorHandler } from "../../utils/errorHandler.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 
@@ -20,64 +19,52 @@ export const scrapeAajTak = asyncHandler(async (req, res) => {
         await page.setDefaultNavigationTimeout(0);
         await page.goto('https://www.aajtak.in/', { waitUntil: 'networkidle2' });
 
-        const containerSelector = "#badi_khabar_1";
+        const containerSelector = "#badi_khabar_1 > div > div.content-area";
 
         const selectors = [
             {
-                title: "a > div:nth-child(1) > h2",
-                link: "a",
-                image: "a > div.thumb > img",
-                description: "a > div:nth-child(3) > p"
+                title: "div.left-story > div.hhm-stoy-left-body > a > div:nth-child(1) > h2",
+                link: "div.left-story > div.hhm-stoy-left-body > a",
+                image: "div.left-story > div.hhm-stoy-left-body > a > div.thumb > img",
+                description: "div.left-story > div.hhm-stoy-left-body > a > div:nth-child(3) > p"
             },
             {
-                title: "div > h3 > a",
-                link: "div > h3 > a",
-                image: "div.thumb.video_asso > img",
-                description: "div.single_str > a > div.title > h3"
+                title: "div.home-single-story > div.mobi_thumVisibleContent > div > h3",
+                link: "div.single_str > a",
+                image: "div.single_str > a > div.thumb.video_asso > img",
+                description: "div.home-single-story > div.single_str > a > div.title > h3"
             },
             {
-                // title: "li:nth-child(1) > a",
+                title: "li:nth-child(1) > a > div.title.title-bold > h3",
                 link: "li:nth-child(1) > a",
                 image: "li:nth-child(1) > a > div.thumb > img",
-                description: "li:nth-child(1) > a > div.title.title-bold > h3"
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
             {
-                // title: "div > h3 > a",
+                title: "li:nth-child(2) > a > div.title.title-bold > h3",
                 link: "li:nth-child(2) > a",
-                image: "li:nth-child(2) > a > div.thumb.video_asso > img",
-                description: "li:nth-child(2) > a > div.title.title-bold > h3"
+                image: "li:nth-child(2) > a > div.thumb > img",
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
             {
-                // title: "div > h3 > a",
+                title: "li:nth-child(3) > a > div.title.title-bold > h3",
                 link: "li:nth-child(3) > a",
                 image: "li:nth-child(3) > a > div.thumb > img",
-                description: "li:nth-child(3) > a > div.title.title-bold > h3"
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
             {
-                // title: "div > h3 > a",
+                title: "li:nth-child(4) > a > div.title.title-bold > h3",
                 link: "li:nth-child(4) > a",
-                image: "li:nth-child(4) > a > div.thumb.video_asso > img",
-                description: "li:nth-child(4) > a > div.title.title-bold > h3"
+                image: "li:nth-child(4) > a > div.thumb > img",
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
             {
-                // title: "div > h3 > a",
+                title: "li:nth-child(5) > a > div.title.title-bold > h3",
                 link: "li:nth-child(5) > a",
                 image: "li:nth-child(5) > a > div.thumb > img",
-                description: "li:nth-child(5) > a > div.title.title-bold > h3"
+                // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
-            {
-                // title: "div > h3 > a",
-                link: "li:nth-child(6) > a",
-                image: "li:nth-child(6) > a > div.thumb > img",
-                description: "li:nth-child(6) > a > div.title.title-bold > h3"
-            },
-            {
-                // title: "div > h3 > a",
-                link: "li:nth-child(7) > a",
-                image: "li:nth-child(7) > a > div.thumb > img",
-                description: "li:nth-child(7) > a > div.title.title-bold > h3"
-            },
-
+            
         ];
 
         const scrapedData = []

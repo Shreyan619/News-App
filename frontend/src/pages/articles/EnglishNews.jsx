@@ -75,6 +75,7 @@ const englishNews = () => {
                           <img src={article.image} alt={article.title} className='article-image-small' />
                         </div>
                       </a>
+                      {index < articles.length - 2 && <hr />}
                     </div>
                   ))}
                 </Slider>

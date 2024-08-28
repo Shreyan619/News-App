@@ -14,6 +14,7 @@ import {
     getFrench,
     getHindi,
     getHindiBusiness,
+    getLatest,
     getSpainSport,
     getSpanish,
     search
@@ -23,6 +24,7 @@ import { scrapeEnglishTech } from "../scrape/eng/englishTech.scrape.js"
 import { scrapeFranceMore } from "../scrape/fra/france.more.js"
 import { scrapeElSport } from "../scrape/spa/el.sport.js"
 import { scrapeHindi } from "../scrape/hind/hindi.scrape.js"
+import { scrapeLatest } from "../scrape/homepagenews/latest.scrape.js"
 
 const article = Router()
 
@@ -108,6 +110,17 @@ article.get("/article/spanishnews", getSpanish)
 article.get("/article/spanishsport", getSpainSport)
 article.get("/article/hindinews", getHindi)
 article.get("/article/hindibusiness", getHindiBusiness)
+
+article.get("/article/popular", async (req, res) => {
+    try {
+        const result = await scrapeLatest();
+        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        // console.log('Result from scrapeEnglish:', result)
+    } catch (error) {
+        res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
+    }
+})
+article.get("/article/popularnews",getLatest)
 
 
 export default article

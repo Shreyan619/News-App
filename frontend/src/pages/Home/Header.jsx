@@ -44,17 +44,17 @@ const Header = () => {
         </div>
       </header>
 
-      <div id='nav'>
-        <div className='news-section flex'>
+      {/* <div id='nav'> */}
+        {/* <div className='news-section flex'> */}
           {/* <div className=''> */}
 
-          <h4>Crime</h4>
+          {/* <h4>Crime</h4>
           <h4>Sports</h4>
           <h4>Politics</h4>
-          <h4>Entertainment</h4>
+          <h4>Entertainment</h4> */}
           {/* </div> */}
-        </div>
-      </div>
+        {/* </div> */}
+      {/* </div> */}
     </>
   )
 }

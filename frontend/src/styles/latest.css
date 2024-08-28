@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
+.popular-articles {
+  background-color: #1a1a2e;
+  color: white;
+  padding: 2rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.title {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+}
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+.article {
+  display: flex;
+  flex-direction: column;
+}
+.article-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.article-content {
+  margin-top: 0.5rem;
+}
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.category {
+  font-size: 0.7rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+.article-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.article-description {
+  font-size: 0.8rem;
+  color: #888;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+.last-news-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.section-title {
+  padding: 0vmax 1vmax;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.see-all-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+.last-news {
+   margin-top: 2rem;
+}

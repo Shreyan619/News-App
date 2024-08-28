@@ -9,6 +9,7 @@ import EnglishNews from './pages/articles/englishNews'
 import Francenews from './pages/articles/FrenchNews'
 import  SpanishNews from "./pages/articles/SpanishNews"
 import  HindiNews from "./pages/articles/HindiNews"
+import LatestNews from './pages/Home/Latest'
 import './index.css'
 
 
@@ -19,10 +20,10 @@ const App = () => {
         <div id='root'>
           <Toaster position="top-center" />
           <Header/>
+          <LatestNews/>
           <div className='main-content'>
             <Routes>
-              <Route path='/home' element={<Header />} />
-
+              
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
 

@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 #header {
   margin: 0vmax;
   padding: 1vmax 0vmax;
   box-sizing: border-box;
   display: flex;
-  background-color: #1e1e19;
+  background-color: #121212;
   color: white;
   position: sticky;
   top: 0;
@@ -32,7 +32,7 @@
 .main > h2 {
   font-size: 2vmax;
   margin-left: 25vmax;
-  font-family: "Roboto", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 900;
   font-style: normal;
 }
@@ -44,7 +44,7 @@
 }
 .main > h3 {
   font-size: 0.3vmax;
-  font-family: "Roboto", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-style: normal;
 }
@@ -111,5 +111,5 @@
 .news-section > h4 {
   font-size: 1vmax;
   font-weight: 500;
-  font-family: "Roboto", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }

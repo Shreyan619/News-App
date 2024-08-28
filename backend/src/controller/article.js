@@ -11,6 +11,7 @@ import { EnglishTech } from "../models/englishTech.model.js";
 import { FranceTech } from "../models/franceMore.model.js";
 import { SpainSport } from "../models/spanishSport.model.js";
 import { hindiBusiness } from "../models/hindiMore.model.js";
+import { LatestArticle } from "../models/homepagemodel/latest.model.js";
 
 const articleModels = {
     Englisharticle: englishArticle,
@@ -243,6 +244,22 @@ export const getHindiBusiness = asyncHandler(async (req, res) => {
 export const getEnglishTech = asyncHandler(async (req, res) => {
     try {
         const articles = await EnglishTech.find({})
+        
+        if (articles.length === 0) {
+            return res.status(404)
+            .json(new apiResponse(404, 'No articles found'))
+        }
+        
+        res.status(200)
+        .json(new apiResponse(200, 'Articles retrieved successfully', articles))
+    } catch (error) {
+        console.error(error)
+        throw new errorHandler(500, 'Error retrieving articles', error.message)
+    }
+})
+export const getLatest = asyncHandler(async (req, res) => {
+    try {
+        const articles = await LatestArticle.find({})
 
         if (articles.length === 0) {
             return res.status(404)

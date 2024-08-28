@@ -1,16 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 .english {
   padding: 1vmax;
   width: 100%;
   margin: auto;
-  background-color: #11133d;
+  background-color: #130F27;
 }
 .header {
   padding: 1vmax;
   font-size: 2rem;
   color:#eeeef5;
-  font-family: "Roboto", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-style: normal;
   display: flex;
@@ -20,7 +21,7 @@
   padding: 1vmax 5vmax;
   font-size: 2vmax;
   color:#eeeef5;
-  font-family: "Roboto", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
   font-style: normal;
 }

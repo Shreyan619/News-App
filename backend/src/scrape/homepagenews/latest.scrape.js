@@ -17,46 +17,46 @@ export const scrapeLatest = asyncHandler(async (req, res) => {
 
         const page = await browser.newPage();
         await page.setDefaultNavigationTimeout(0);
-        await page.goto('https://timesofindia.indiatimes.com/news', { waitUntil: 'networkidle2' });
+        await page.goto('https://www.ndtv.com/latest', { waitUntil: 'networkidle2' });
 
-        const containerSelector = "div.YBHYk > div:nth-child(3) > div > div > div.QeV0F > div > ul";
+        const containerSelector = "body > div.content > div > div > section";
 
         const selectors = [
             {
-                title: "li:nth-child(1) > a > div.UreF0 > p.CRKrj",
-                link: "li:nth-child(1) > a",
-                image: "li:nth-child(1) > a > div.Ng0mw > div > img",
-                description: "li:nth-child(1) > a > div.UreF0 > p.W4Hjm"
+                title: "div:nth-child(1) > div.news_Itm-cont > h2",
+                link: "div:nth-child(1) > div.news_Itm-img > a",
+                image: "div:nth-child(1) > div.news_Itm-img > a > img",
+                description: "div:nth-child(1) > div.news_Itm-cont > p"
             },
             {
-                title: "li:nth-child(2) > a > div.UreF0 > p.CRKrj",
-                link: "li:nth-child(2) > a",
-                image: "li:nth-child(2) > a > div.Ng0mw > div > img",
-                description: "li:nth-child(2) > a > div.UreF0 > p.W4Hjm"
+                title: "div:nth-child(2) > div.news_Itm-cont > h2",
+                link: "div:nth-child(2) > div.news_Itm-img > a",
+                image: "div:nth-child(2) > div.news_Itm-img > a > img",
+                description: "div:nth-child(2) > div.news_Itm-cont > p"
             },
             {
-                title: "li:nth-child(4) > a > div.UreF0 > p.CRKrj",
-                link: "li:nth-child(4) > a",
-                image: "li:nth-child(4) > a > div.Ng0mw > div > img",
-                description: "li:nth-child(4) > a > div.UreF0 > p.W4Hjm"
+                title: "div:nth-child(3) > div.news_Itm-cont > h2",
+                link: "div:nth-child(3) > div.news_Itm-img > a",
+                image: "div:nth-child(3) > div.news_Itm-img > a > img",
+                description: "div:nth-child(3) > div.news_Itm-cont > p"
             },
             {
-                title: "li:nth-child(3) > a > div.UreF0 > p.CRKrj",
-                link: "li:nth-child(3) > a",
-                image: "li:nth-child(3) > a > div.Ng0mw > div > img",
-                description: "li:nth-child(3) > a > div.UreF0 > p.W4Hjm"
+               title: "div:nth-child(6) > div.news_Itm-cont > h2",
+                link: "div:nth-child(6) > div.news_Itm-img > a",
+                image: "div:nth-child(6) > div.news_Itm-img > a > img",
+                description: "div:nth-child(6) > div.news_Itm-cont > p"
             },
             {
-                title: "li:nth-child(5) > a > div.UreF0 > p.CRKrj",
-                link: "li:nth-child(5) > a",
-                image: "li:nth-child(5) > a > div.Ng0mw > div > img",
-                description: "li:nth-child(5) > a > div.UreF0 > p.W4Hjm"
+                title: "div:nth-child(7) > div.news_Itm-cont > h2",
+                link: "div:nth-child(7) > div.news_Itm-img > a",
+                image: "div:nth-child(7) > div.news_Itm-img > a > img",
+                description: "div:nth-child(7) > div.news_Itm-cont > p"
             },
             {
-                title: "li:nth-child(6) > a > div.UreF0 > p.CRKrj",
-                link: "li:nth-child(6) > a",
-                image: "li:nth-child(6) > a > div.Ng0mw > div > img",
-                description: "li:nth-child(6) > a > div.UreF0 > p.W4Hjm"
+                title: "li:nth-child(8) > a > div.UreF0 > p.CRKrj",
+                link: "li:nth-child(8) > a",
+                image: "li:nth-child(8) > a > div.Ng0mw > div > img",
+                description: "li:nth-child(8) > a > div.UreF0 > p.W4Hjm"
             },
             
 

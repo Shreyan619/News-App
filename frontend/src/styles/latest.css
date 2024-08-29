@@ -23,7 +23,7 @@
 }
 .article-image {
   width: 100%;
-  height: 200px;
+  height: 280px;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -57,7 +57,7 @@
   font-style: normal;
 }
 .last-news-grid {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 .section-header {
   display: flex;
@@ -84,5 +84,22 @@
   font-style: normal;
 }
 .last-news {
-   margin-top: 2rem;
+  margin-top: 2rem;
+}
+.latest-article-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.latest-article-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.additional-articles {
+  margin-top: 2rem;
 }

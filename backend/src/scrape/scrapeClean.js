@@ -14,6 +14,7 @@ import { scrapeEnglishTech } from "./eng/englishTech.scrape.js"
 import { scrapeFranceMore } from "./fra/france.more.js"
 import { scrapeElSport } from "./spa/el.sport.js"
 import { scrapeHindi } from "./hind/hindi.scrape.js"
+import { scrapeLatest } from "./homepagenews/latest.scrape.js"
 
 
 // delete old articles
@@ -53,6 +54,7 @@ cron.schedule("*/1 * * * *", async () => {
         await scrapeFranceMore()
         await scrapeElSport()
         await scrapeHindi()
+        await scrapeLatest()
 
         console.log("Scraping and cleaning completed successfully")
     } catch (error) {

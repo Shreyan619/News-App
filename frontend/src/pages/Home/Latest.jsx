@@ -72,7 +72,7 @@ const LatestNews = () => {
                     {showAllArticles && (
                         <div className="additional-articles">
                             <div className="articles-grid last-news-grid">
-                                {articles.slice(7).map((article, index) => (
+                                {articles.slice(7,13).map((article, index) => (
                                     <div key={index || article.id} className="article">
                                         <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                             <div className="latest-article-image-container">

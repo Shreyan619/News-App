@@ -7,11 +7,20 @@ import Footer from './pages/Home/Footer'
 import Signup from './pages/User profile/Signup'
 import EnglishNews from './pages/articles/englishNews'
 import Francenews from './pages/articles/FrenchNews'
-import  SpanishNews from "./pages/articles/SpanishNews"
-import  HindiNews from "./pages/articles/HindiNews"
+import SpanishNews from "./pages/articles/SpanishNews"
+import HindiNews from "./pages/articles/HindiNews"
 import LatestNews from './pages/Home/Latest'
 import './index.css'
 
+
+const Home = () => (
+  <div>
+    <div id="#latest">
+      <LatestNews />
+    </div>
+
+  </div>
+)
 
 const App = () => {
   return (
@@ -19,11 +28,10 @@ const App = () => {
       <Router>
         <div id='root'>
           <Toaster position="top-center" />
-          <Header/>
-          <LatestNews/>
+          <Header />
           <div className='main-content'>
             <Routes>
-              
+              <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
 

@@ -53,11 +53,53 @@ export const scrapeLatest = asyncHandler(async (req, res) => {
                 description: "div:nth-child(7) > div.news_Itm-cont > p"
             },
             {
-                title: "li:nth-child(8) > a > div.UreF0 > p.CRKrj",
-                link: "li:nth-child(8) > a",
-                image: "li:nth-child(8) > a > div.Ng0mw > div > img",
-                description: "li:nth-child(8) > a > div.UreF0 > p.W4Hjm"
+                title: "div:nth-child(8) > div.news_Itm-cont > h2",
+                link: "div:nth-child(8) > div.news_Itm-img > a",
+                image: "div:nth-child(8) > div.news_Itm-img > a > img",
+                description: "div:nth-child(8) > div.news_Itm-cont > p"
             },
+            {
+                title: "div:nth-child(11) > div.news_Itm-cont > h2",
+                link: "div:nth-child(11) > div.news_Itm-img > a",
+                image: "div:nth-child(11) > div.news_Itm-img > a > img",
+                description: "div:nth-child(11) > div.news_Itm-cont > p"
+            },
+            {
+                title: "div:nth-child(12) > div.news_Itm-cont > h2",
+                link: "div:nth-child(12) > div.news_Itm-img > a",
+                image: "div:nth-child(12) > div.news_Itm-img > a > img",
+                description: "div:nth-child(12) > div.news_Itm-cont > p"
+            },
+            {
+                title: "li:nth-child(13) > a > div.UreF0 > p.CRKrj",
+                link: "div:nth-child(13) > div.news_Itm-img > a",
+                image: "li:nth-child(13) > a > div.Ng0mw > div > img",
+                description: "div:nth-child(13) > div.news_Itm-img > a"
+            },
+            // {
+            //     title: "li:nth-child(15) > a > div.UreF0 > p.CRKrj",
+            //     link: "div:nth-child(15) > div.news_Itm-img > a",
+            //     image: "li:nth-child(15) > a > div.Ng0mw > div > img",
+            //     description: "div:nth-child(15) > div.news_Itm-img > a"
+            // },
+            // {
+            //     title: "li:nth-child(16) > a > div.UreF0 > p.CRKrj",
+            //     link: "div:nth-child(16) > div.news_Itm-img > a",
+            //     image: "li:nth-child(16) > a > div.Ng0mw > div > img",
+            //     description: "div:nth-child(16) > div.news_Itm-img > a"
+            // },
+            // {
+            //     title: "li:nth-child(17) > a > div.UreF0 > p.CRKrj",
+            //     link: "div:nth-child(17) > div.news_Itm-img > a",
+            //     image: "li:nth-child(17) > a > div.Ng0mw > div > img",
+            //     description: "div:nth-child(17) > div.news_Itm-img > a"
+            // },
+            // {
+            //     title: "li:nth-child(18) > a > div.UreF0 > p.CRKrj",
+            //     link: "div:nth-child(18) > div.news_Itm-img > a",
+            //     image: "li:nth-child(18) > a > div.Ng0mw > div > img",
+            //     description: "div:nth-child(18) > div.news_Itm-img > a"
+            // },
             
 
         ];

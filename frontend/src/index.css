@@ -24,7 +24,7 @@ body {
 
 /* The main content area should take up all available space */
 .main-content {
-  padding-top: 3vmax;
+  /* padding-top: 3vmax; */
   flex: 1;
 }
 

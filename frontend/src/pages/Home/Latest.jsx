@@ -37,7 +37,7 @@ const LatestNews = () => {
                 <h1 className="title">The Most Popular</h1>
                 <div className="articles-grid">
                     {articles.slice(0, 3).map((article, index) => (
-                        <div key={index || article.id} className="article">
+                        <div key={article._id} className="article">
                             <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                 <img src={article.image} alt={article.title} className="article-image" />
                                 <div className="article-content">
@@ -56,7 +56,7 @@ const LatestNews = () => {
                     </div>
                     <div className="articles-grid last-news-grid">
                         {articles.slice(3, 7).map((article, index) => (
-                            <div key={index || article.id} className="article">
+                            <div key={article._id} className="article">
                                 <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                     <div className="latest-article-image-container">
                                         <img src={article.image} alt={article.title} className="latest-article-image" />
@@ -73,7 +73,7 @@ const LatestNews = () => {
                         <div className="additional-articles">
                             <div className="articles-grid last-news-grid">
                                 {articles.slice(7,13).map((article, index) => (
-                                    <div key={index || article.id} className="article">
+                                    <div key={article._id} className="article">
                                         <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                             <div className="latest-article-image-container">
                                                 <img src={article.image} alt={article.title} className="latest-article-image" />

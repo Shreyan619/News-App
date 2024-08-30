@@ -10,6 +10,7 @@ import Francenews from './pages/articles/FrenchNews'
 import SpanishNews from "./pages/articles/SpanishNews"
 import HindiNews from "./pages/articles/HindiNews"
 import LatestNews from './pages/Home/Latest'
+import ScrollText from './pages/Home/ScrollText'
 import './index.css'
 
 
@@ -29,6 +30,7 @@ const App = () => {
         <div id='root'>
           <Toaster position="top-center" />
           <Header />
+          <ScrollText/>
           <div className='main-content'>
             <Routes>
               <Route path='/' element={<Home />} />

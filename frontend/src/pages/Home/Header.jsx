@@ -21,7 +21,7 @@ const Header = () => {
     };
   }, []);
 
-   const handleMouseEnter = () => {
+  const handleMouseEnter = () => {
     setDropdownOpen(true);
   };
 
@@ -29,7 +29,9 @@ const Header = () => {
     setDropdownOpen(false);
   };
 
- 
+  const handleDropdownToggle = () => {
+    setDropdownOpen(!dropdownOpen);
+  }
 
 
   return (
@@ -37,16 +39,18 @@ const Header = () => {
       <header id='header' className={scroll ? 'scrolled' : ''}>
         <div className='main'>
           <div className="logo-nav">
-            <LuSunSnow className='sun'/>
+            <LuSunSnow className='sun' />
             <h2>NEW&</h2>
             <ul className='news-group'>
-              <li><a href='#latest'>Latest</a></li>
-              <li>Sports</li>
-              <li>Lifestyle</li>
+              {/* <li><a href='#latest'>Latest</a></li>
+              <li>Sports</li> */}
+              <li><Link to="/article/english">English</Link></li>
+              <li><Link to="/article/france">France</Link></li>
+              <li><Link to="/article/spain">Spain</Link></li>
+              <li><Link to="/article/hindi">Hindi</Link></li>
               <div
                 className="dropdown-container"
                 onMouseEnter={handleMouseEnter}
-              
               >
                 <IoMenu className='lines' style={{ cursor: 'pointer' }} />
                 {dropdownOpen && (
@@ -67,13 +71,6 @@ const Header = () => {
             </ul>
           </div>
           <div className='languages-search-container'>
-            <select className='dropdown-menu'>
-              <option>Languages</option>
-              <option>English</option>
-              <option>Spanish</option>
-              <option>Hindi</option>
-              <option>French</option>
-            </select>
             <div className='search-container'>
               <input type="text" placeholder="Search..." />
               <FaSearch className='search' style={{ cursor: 'pointer' }} />
@@ -81,18 +78,6 @@ const Header = () => {
           </div>
         </div>
       </header>
-
-      {/* <div id='nav'> */}
-      {/* <div className='news-section flex'> */}
-      {/* <div className=''> */}
-
-      {/* <h4>Crime</h4>
-          <h4>Sports</h4>
-          <h4>Politics</h4>
-          <h4>Entertainment</h4> */}
-      {/* </div> */}
-      {/* </div> */}
-      {/* </div> */}
     </>
   )
 }

@@ -5,7 +5,7 @@
   padding: 15px 20px;
   position: fixed;
   width: 100%;
-  z-index: 1000;
+  z-index: 100;
   color: white;
   display: flex;
   align-items: center;
@@ -60,30 +60,91 @@
   align-items: center;
 }
 
-.search {
-  margin-left: 10px;
-  color: #ffffff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
 .lines {
   color: #ffffff;
   font-size: 24px;
   margin-left: 10px;
 }
 
-.dropdown-menu {
-  background-color: #0f0f20;
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  padding: 5px;
-}
 .languages-search-container {
   display: flex;
   align-items: center;
+  gap: 20px;
+  position: relative;
 }
+.dropdown-menu-container {
+  position: relative;
+  cursor: pointer;
+}
+.dropdown-placeholder {
+  background-color: #bfbfd8;
+  color: #121212;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  min-width: 100px; /* Adjust as needed */
+}
+.dropdown-options {
+  background-color: #bfbfd8;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.dropdown-options a {
+  display: block;
+  padding: 5px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.dropdown-options a:hover {
+  background-color: #a0a0c0;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc; /* Border around the search container */
+  border-radius: 4px;
+  background-color: #fff; /* White background for the search container */
+}
+
+.search-container input {
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  width: 150px;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.search-container input::placeholder {
+  color: #aaa;
+}
+
+.search {
+  color: #121221;
+  padding: 8px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 2.5vmax;
+}
+
+.search:hover {
+  background-color: #357abd; /* Change background color on hover */
+}
+
 .dropdown-content {
   /* display: none; */
   position: absolute;

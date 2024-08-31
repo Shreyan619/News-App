@@ -1,5 +1,5 @@
 import React from 'react'
-import { useScrapeFranceQuery, useScrapeFranceTechQuery } from '../../redux/api/franceapi'
+import { useScrapeFranceQuery, useScrapeFranceTechQuery } from '../../redux/api/franceapi';
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,8 +7,8 @@ import "../../styles/francenews.css"
 
 
 const francenews = () => {
-    const { data: response, error, isLoading } = useScrapeFranceQuery()
-    const { data: techResponse, error: techError, isLoading: techLoading } = useScrapeFranceTechQuery()
+    const { data: response, error, isLoading } = useScrapeFranceQuery() || {}
+    const { data: techResponse, error: techError, isLoading: techLoading } = useScrapeFranceTechQuery() || {}
 
     const articles = response?.data || []
     const techArticles = techResponse?.data || [];
@@ -64,7 +64,7 @@ const francenews = () => {
                             <div className='small-articles-fr'>
                                 <Slider {...settings}>
                                     {articles.slice(1, 6).map((article, index) => (
-                                        <div key={article.id || index} className='small-article-wrapper'>
+                                        <div key={article._id || index} className='small-article-wrapper'>
                                             <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                                 <div className='small-article-fr'>
                                                     <div className='small-article-content'>
@@ -88,7 +88,7 @@ const francenews = () => {
                 <header className='header-tech-fr'>Economie</header>
                 <Slider {...techSettings}>
                     {techArticles.map((article, index) => (
-                        <div key={article.id || index} className='Tech-news-fr'>
+                        <div key={article._id} className='Tech-news-fr'>
                             <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                 <h3 className='article-title-Tech-fr'>{article.title}</h3>
                                 <img src={article.image} alt={article.title} className='article-image-Tech-fr' />

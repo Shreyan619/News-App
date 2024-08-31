@@ -64,7 +64,7 @@ const hindinews = () => {
                             <div className='small-articles-hi'>
                                 <Slider {...settings}>
                                     {articles.slice(1, 6).map((article, index) => (
-                                        <div key={article.id || index} className='small-article-wrapper'>
+                                        <div key={article._id || index} className='small-article-wrapper'>
                                             <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                                 <div className='small-article-hi'>
                                                     <div className='small-article-content'>
@@ -88,7 +88,7 @@ const hindinews = () => {
                 <header className='header-tech-hi'>बिजनेस</header>
                 <Slider {...techSettings}>
                     {techArticles.map((article, index) => (
-                        <div key={article.id || index} className='Tech-news-hi'>
+                        <div key={article._id || index} className='Tech-news-hi'>
                             <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                 <h3 className='article-title-Tech-hi'>{article.title}</h3>
                                 <img src={article.image} alt={article.title} className='article-image-Tech-hi' />

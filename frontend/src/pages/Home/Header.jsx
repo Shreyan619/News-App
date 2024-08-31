@@ -42,8 +42,8 @@ const Header = () => {
             <LuSunSnow className='sun' />
             <h2>NEW&</h2>
             <ul className='news-group'>
-              {/* <li><a href='#latest'>Latest</a></li>
-              <li>Sports</li> */}
+              <li><a href='#latest'>Latest</a></li>
+              <li>Sports</li>
               <li><Link to="/article/english">English</Link></li>
               <li><Link to="/article/france">France</Link></li>
               <li><Link to="/article/spain">Spain</Link></li>
@@ -61,10 +61,10 @@ const Header = () => {
                   >
                     <Link to="/login">Login</Link>
                     <Link to="/signup">SignUp</Link>
-                    <Link to="/article/english">English</Link>
+                    {/* <Link to="/article/english">English</Link>
                     <Link to="/article/france">France</Link>
                     <Link to="/article/spain">Spain</Link>
-                    <Link to="/article/hindi">Hindi</Link>
+                    <Link to="/article/hindi">Hindi</Link> */}
                   </div>
                 )}
               </div>

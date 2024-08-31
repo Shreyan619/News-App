@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const spainApi = createApi({
+export const spainapi = createApi({
     reducerPath: 'spainApi',
     baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_SERVER}/api/v1` }),
     endpoints: (build) => ({
@@ -21,4 +21,4 @@ export const spainApi = createApi({
     })
 })
 
-export const { useScrapeSpainQuery, useScrapeSpainSportQuery } = spainApi
+export const { useScrapeSpainQuery, useScrapeSpainSportQuery } = spainapi

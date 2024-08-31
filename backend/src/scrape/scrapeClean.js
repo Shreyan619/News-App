@@ -40,7 +40,7 @@ const deleteOldArticles = async (req, res) => {
     }
 }
 
-cron.schedule("*/1 * * * *", async () => {
+cron.schedule("*/30 * * * *", async () => {
     console.log('Running scheduled task for scraping and cleaning')
 
     try {
@@ -68,7 +68,7 @@ cron.schedule("*/10 * * * *", async () => {
 })
 
 cron.schedule("0 * * * *", async () => {
-    console.log('Running scheduled task to fetch English articles');
+    console.log('Running scheduled task to fetch articles');
 
     try {
         const req = {}; // simulate the request object here

@@ -229,7 +229,8 @@ export const bookmarkArticle = asyncHandler(async (req, res) => {
             articlemodel,
             title: articleExist.title,
             image: articleExist.image,
-            link: articleExist.link
+            link: articleExist.link,
+            description: articleExist.description
         });
 
         await newBookmark.save();

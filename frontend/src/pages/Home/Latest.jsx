@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import "../../styles/latest.css"
 import { useScrapLatestQuery } from '../../redux/api/latestapi';
 import { ChevronRight } from 'lucide-react'
-
+import { useBookmarkMutation, useRemovebookmarkMutation } from '../../redux/api/bookmarkapi';
+import { FaRegBookmark } from "react-icons/fa";
+import { FaBookmark } from "react-icons/fa";
 
 const formatTime = () => {
     const date = new Date('2024-08-22T10:00:00');
@@ -12,16 +14,14 @@ const formatTime = () => {
 const LatestNews = () => {
     const [showAllArticles, setShowAllArticles] = useState(false)
     const { data: response, error, isLoading } = useScrapLatestQuery()
-    //   const { data: techResponse, error: techError, isLoading: techLoading } = 
+    const [bookmark] = useBookmarkMutation()
+    const [removeBookmark]=useRemovebookmarkMutation()
 
     const articles = response?.data || []
-    //   const techArticles = techResponse?.data || [];
+
     if (articles) {
         console.log(articles)
     }
-    //   if (techArticles) {
-    //     console.log(techArticles)
-    //   }
 
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Error loading articles!</p>;
@@ -43,6 +43,7 @@ const LatestNews = () => {
                                 <div className="article-content">
                                     <h2 className="article-title">{article.title}</h2>
                                     <h5 className="article-description">{article.description}</h5>
+                                    <FaRegBookmark />
                                 </div>
                             </a>
                         </div>
@@ -72,7 +73,7 @@ const LatestNews = () => {
                     {showAllArticles && (
                         <div className="additional-articles">
                             <div className="articles-grid last-news-grid">
-                                {articles.slice(7,13).map((article, index) => (
+                                {articles.slice(7, 13).map((article, index) => (
                                     <div key={article._id} className="article">
                                         <a href={article.link} target='_blank' rel='noopener noreferrer'>
                                             <div className="latest-article-image-container">

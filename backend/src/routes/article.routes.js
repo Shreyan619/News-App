@@ -63,7 +63,7 @@ article.get("/article/english", async (req, res) => {
 article.get("/article/english/tech", async (req, res) => {
     try {
         const result = await scrapeEnglishTech();
-        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        res.status(200).json(new apiResponse(201, "English tech Articles scraped and saved successfully", result));
         // console.log('Result from scrapeEnglish:', result)
     } catch (error) {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
@@ -72,7 +72,7 @@ article.get("/article/english/tech", async (req, res) => {
 article.get("/article/spain/sport", async (req, res) => {
     try {
         const result = await scrapeElSport();
-        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        res.status(200).json(new apiResponse(201, "spain sport Articles scraped and saved successfully", result));
         // console.log('Result from scrapeEnglish:', result)
     } catch (error) {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
@@ -81,7 +81,7 @@ article.get("/article/spain/sport", async (req, res) => {
 article.get("/article/hindi/business", async (req, res) => {
     try {
         const result = await scrapeHindi();
-        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        res.status(200).json(new apiResponse(201, "hindi business Articles scraped and saved successfully", result));
         // console.log('Result from scrapeEnglish:', result)
     } catch (error) {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
@@ -90,7 +90,7 @@ article.get("/article/hindi/business", async (req, res) => {
 article.get("/article/france/more", async (req, res) => {
     try {
         const result = await scrapeFranceMore();
-        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        res.status(200).json(new apiResponse(201, "French more Articles scraped and saved successfully", result));
         // console.log('Result from scrapeEnglish:', result)
     } catch (error) {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));
@@ -114,7 +114,7 @@ article.get("/article/hindibusiness", getHindiBusiness)
 article.get("/article/popular", async (req, res) => {
     try {
         const result = await scrapeLatest();
-        res.status(200).json(new apiResponse(201, "English Articles scraped and saved successfully", result));
+        res.status(200).json(new apiResponse(201, "popular Articles scraped and saved successfully", result));
         // console.log('Result from scrapeEnglish:', result)
     } catch (error) {
         res.status(error.statusCode || 500).json(new apiResponse(error.statusCode || 500, error.message || "Internal Server Error"));

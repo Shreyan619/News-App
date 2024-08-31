@@ -16,7 +16,7 @@ import './index.css'
 
 const Home = () => (
   <div>
-    <div id="#latest">
+    <div id="latest">
       <LatestNews />
     </div>
 

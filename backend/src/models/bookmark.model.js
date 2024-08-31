@@ -11,7 +11,10 @@ const bookmarkSchema = new mongoose.Schema({
     },
     articlemodel: {
         type: String,
-        enum: ["Englisharticle", "Spanisharticle", "Frencharticle", "Hindiarticle"],
+        enum: [
+            "Englisharticle", "Spanisharticle", "Frencharticle", "Hindiarticle",
+            "EnglishTech", "FranceTech", "spainsport", "Hindibusiness","Latest"
+        ],
         required: true
     },
     title: {

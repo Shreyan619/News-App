@@ -6,12 +6,13 @@ import { errorHandler } from "../../utils/errorHandler.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
 
 
-
+import dotenv from "dotenv"
+dotenv.config()
 
 export const scrapeAajTak = asyncHandler(async (req, res, next) => {
     try {
         const browser = await puppeteer.launch({
-            //    executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe',
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/local/bin/chrome-linux/chrome',
             headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',

@@ -10,6 +10,7 @@ import { FranceTech } from "../../models/franceMore.model.js";
 export const scrapeFranceMore = asyncHandler(async () => {
     try {
         const browser = await puppeteer.launch({
+            executablePath: 'C:\\Users\\LENOVO\\.cache\\puppeteer\\chrome\\win64-127.0.6533.88\\chrome-win64\\chrome.exe',
             headless: true,
             defaultViewport: null
         });

@@ -11,8 +11,7 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 export const scrapeLatest = asyncHandler(async (req, res) => {
     try {
         const browser = await puppeteer.launch({
-            executablePath: 'C:\Users\LENOVO\.cache\puppeteer\chrome\win64-127.0.6533.88\chrome-win64\chrome.exe',// executablePath: 'C:\\Users\\LENOVO\\.cache\\puppeteer\\chrome\\win64-127.0.6533.88\\chrome-win64\\chrome.exe',
-            headless: true,
+            executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe', headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -44,7 +43,7 @@ export const scrapeLatest = asyncHandler(async (req, res) => {
                 description: "div:nth-child(3) > div.news_Itm-cont > p"
             },
             {
-               title: "div:nth-child(6) > div.news_Itm-cont > h2",
+                title: "div:nth-child(6) > div.news_Itm-cont > h2",
                 link: "div:nth-child(6) > div.news_Itm-img > a",
                 image: "div:nth-child(6) > div.news_Itm-img > a > img",
                 description: "div:nth-child(6) > div.news_Itm-cont > p"
@@ -103,7 +102,7 @@ export const scrapeLatest = asyncHandler(async (req, res) => {
             //     image: "li:nth-child(18) > a > div.Ng0mw > div > img",
             //     description: "div:nth-child(18) > div.news_Itm-img > a"
             // },
-            
+
 
         ];
 

@@ -10,8 +10,7 @@ import { frenchArticle } from "../../models/french.model.js"
 export const scrapeFrance = asyncHandler(async () => {
     try {
         const browser = await puppeteer.launch({
-           executablePath: 'C:\Users\LENOVO\.cache\puppeteer\chrome\win64-127.0.6533.88\chrome-win64\chrome.exe', // executablePath: 'C:\\Users\\LENOVO\\.cache\\puppeteer\\chrome\\win64-127.0.6533.88\\chrome-win64\\chrome.exe',
-            headless: true,
+            executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe', headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -49,10 +48,10 @@ export const scrapeFrance = asyncHandler(async () => {
                 description: "article:nth-child(6) > div.thumbnail__text__wrapper > div > div.thumbnail__description"
             },
             {
-                title:"article:nth-child(7) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a > h2",
-                link:"article:nth-child(7) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a",
-                image:"article:nth-child(7) > div.thumbnail__image.link--unstyled > a > picture > img",
-                description:"article:nth-child(7) > div.thumbnail__text__wrapper > div > div.thumbnail__description"
+                title: "article:nth-child(7) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a > h2",
+                link: "article:nth-child(7) > div.thumbnail__text__wrapper > div > div.thumbnail__title.headline--lg > a",
+                image: "article:nth-child(7) > div.thumbnail__image.link--unstyled > a > picture > img",
+                description: "article:nth-child(7) > div.thumbnail__text__wrapper > div > div.thumbnail__description"
             }
         ];
 

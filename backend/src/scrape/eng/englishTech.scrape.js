@@ -7,8 +7,7 @@ import { EnglishTech } from "../../models/englishTech.model.js";
 export const scrapeEnglishTech = asyncHandler(async () => {
     try {
         const browser = await puppeteer.launch({
-           executablePath: 'C:\Users\LENOVO\.cache\puppeteer\chrome\win64-127.0.6533.88\chrome-win64\chrome.exe', // executablePath: 'C:\\Users\\LENOVO\\.cache\\puppeteer\\chrome\\win64-127.0.6533.88\\chrome-win64\\chrome.exe',
-            headless: true,
+            executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe', headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
@@ -25,38 +24,38 @@ export const scrapeEnglishTech = asyncHandler(async () => {
                 title: "section:nth-child(1) > div.ContentRoll__Headline > h2",
                 link: "section:nth-child(1) > div.ContentRoll__Headline > h2 > a",
                 image: "section:nth-child(1) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
-                description:"section:nth-child(1) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
+                description: "section:nth-child(1) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
             {
                 title: "section:nth-child(2) > div.ContentRoll__Headline > h2",
                 link: "section:nth-child(2) > div.ContentRoll__Headline > h2 > a",
                 image: "section:nth-child(2) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
-                description:"section:nth-child(2) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
+                description: "section:nth-child(2) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
             {
                 title: "section:nth-child(3) > div.ContentRoll__Headline > h2",
                 link: "section:nth-child(3) > div.ContentRoll__Headline > h2 > a",
                 image: "section:nth-child(3) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
-                description:"section:nth-child(3) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
+                description: "section:nth-child(3) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
             {
                 title: "section:nth-child(4) > div.ContentRoll__Headline > h2",
                 link: "section:nth-child(4) > div.ContentRoll__Headline > h2 > a",
                 image: "section:nth-child(4) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
-                description:"section:nth-child(4) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
+                description: "section:nth-child(4) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
             {
                 title: "section:nth-child(5) > div.ContentRoll__Headline > h2",
                 link: "section:nth-child(5) > div.ContentRoll__Headline > h2 > a",
                 image: "section:nth-child(5) > div.ContentRoll__Image > a > figure > div.Image__Wrapper.aspect-ratio--child > picture > img",
-                description:"section:nth-child(5) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
+                description: "section:nth-child(5) > div.ContentRoll__Headline > div > div.ContentRoll__Desc"
 
             },
-           
+
         ];
 
         const scrapedData = []

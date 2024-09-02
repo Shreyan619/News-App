@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "start":"nodemon server.js"
+    "start":"nodemon server.js",
+     "postinstall": "apt-get update && apt-get install -y wget libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 libxss1 libxtst6 libnss3 libgtk-3-0 && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb"
   },
   "keywords": [],
   "author": "",

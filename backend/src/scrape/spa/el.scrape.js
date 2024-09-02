@@ -7,10 +7,10 @@ import { spanishArticle } from "../../models/spanish.model.js"
 
 
 
-export const scrapeEl = asyncHandler(async (req, res) => {
+export const scrapeEl = asyncHandler(async (req, res, next) => {
     try {
         const browser = await puppeteer.launch({
-            executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe',
+            // executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe',
             headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
@@ -122,6 +122,7 @@ export const scrapeEl = asyncHandler(async (req, res) => {
 
     } catch (error) {
         console.error("Error during scraping:", error);
+        next(error)
         throw new errorHandler(501, "Error during scraping")
     }
 });

@@ -7,14 +7,14 @@ import { SpainSport } from "../../models/spanishSport.model.js";
 
 
 
-export const scrapeElSport = asyncHandler(async (req, res) => {
+export const scrapeElSport = asyncHandler(async (req, res, next) => {
     try {
 
         const path = 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe'
         console.log(path)
-        
+
         const browser = await puppeteer.launch({
-            executablePath: path,
+            // executablePath: path,
             headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
@@ -126,6 +126,7 @@ export const scrapeElSport = asyncHandler(async (req, res) => {
 
     } catch (error) {
         console.error("Error during scraping:", error);
+        next(error)
         throw new errorHandler(501, "Error during scraping")
     }
 });

@@ -8,10 +8,10 @@ import { asyncHandler } from "../../utils/asyncHandler.js";
 
 
 
-export const scrapeAajTak = asyncHandler(async (req, res) => {
+export const scrapeAajTak = asyncHandler(async (req, res, next) => {
     try {
         const browser = await puppeteer.launch({
-           executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe',
+            //    executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe',
             headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
@@ -67,7 +67,7 @@ export const scrapeAajTak = asyncHandler(async (req, res) => {
                 image: "li:nth-child(5) > a > div.thumb > img",
                 // description: "li:nth-child(1) > a > div.title.title-bold > h3"
             },
-            
+
         ];
 
         const scrapedData = []
@@ -133,6 +133,7 @@ export const scrapeAajTak = asyncHandler(async (req, res) => {
 
     } catch (error) {
         console.error("Error during scraping:", error);
+        next(error)
         throw new errorHandler(501, "Error during scraping")
     }
 });

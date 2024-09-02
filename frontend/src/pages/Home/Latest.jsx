@@ -15,7 +15,8 @@ const LatestNews = () => {
     const [showAllArticles, setShowAllArticles] = useState(false)
     const { data: response, error, isLoading } = useScrapLatestQuery()
     const [bookmark] = useBookmarkMutation()
-    const [removeBookmark]=useRemovebookmarkMutation()
+    const [removeBookmark] = useRemovebookmarkMutation()
+    const [bookmarkedArticles, setBookmarkedArticles] = useState([])
 
     const articles = response?.data || []
 
@@ -31,6 +32,18 @@ const LatestNews = () => {
         setShowAllArticles(!showAllArticles);
     }
 
+    const handleBookmarkClick = async (article) => {
+        if (bookmarkedArticles.includes(article._id)) {
+            await removeBookmark({ articleId: article._id })
+            setBookmarkedArticles(bookmarkedArticles.filter(id => id !== article._id))
+        } else {
+            await bookmark({ articleId: article._id })
+            setBookmarkedArticles([...bookmarkedArticles, article._id])
+        }
+    }
+
+    const isBookmarked = (articleId) => bookmarkedArticles.includes(articleId)
+
     return (
         <>
             <div className="popular-articles">
@@ -43,7 +56,9 @@ const LatestNews = () => {
                                 <div className="article-content">
                                     <h2 className="article-title">{article.title}</h2>
                                     <h5 className="article-description">{article.description}</h5>
-                                    <FaRegBookmark />
+                                    <div className="bookmark-icon" onClick={(e) => { e.preventDefault(); handleBookmarkClick(article); }}>
+                                        {isBookmarked(article._id) ? <FaBookmark /> : <FaRegBookmark />}
+                                    </div>
                                 </div>
                             </a>
                         </div>

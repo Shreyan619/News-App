@@ -15,7 +15,7 @@ export const scrapeAajTak = asyncHandler(async (req, res, next) => {
             // executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/local/bin/chrome-linux/chrome',
             headless: true,
             defaultViewport: null,
-            cacheDir: '/opt/render/.cache/puppeteer',
+            // cacheDir: '/opt/render/.cache/puppeteer',
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
 

@@ -17,7 +17,6 @@ export const scrapeElSport = asyncHandler(async (req, res, next) => {
             // executablePath: path,
             headless: true,
             defaultViewport: null,
-            cacheDir: '/opt/render/.cache/puppeteer',
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
 

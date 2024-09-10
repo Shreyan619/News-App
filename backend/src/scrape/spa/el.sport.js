@@ -10,8 +10,8 @@ import { SpainSport } from "../../models/spanishSport.model.js";
 export const scrapeElSport = asyncHandler(async (req, res, next) => {
     try {
 
-        const path = 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe'
-        console.log(path)
+        // const path = 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe'
+        // console.log(path)
 
         const browser = await puppeteer.launch({
             // executablePath: path,
@@ -65,7 +65,8 @@ export const scrapeElSport = asyncHandler(async (req, res, next) => {
         const scrapedData = []
 
         // console.log(`Waiting for selector: ${containerSelector}`);
-        await page.waitForSelector(containerSelector, { timeout: 10000 });
+        await page.waitForSelector(containerSelector);
+        // await page.waitForSelector(containerSelector, { timeout: 10000 });
 
         const articles = await page.$$(containerSelector);
 

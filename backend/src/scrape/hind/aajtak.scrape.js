@@ -12,7 +12,7 @@ dotenv.config()
 export const scrapeAajTak = asyncHandler(async (req, res, next) => {
     try {
         const browser = await puppeteer.launch({
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/local/bin/chrome-linux/chrome',
+            // executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/local/bin/chrome-linux/chrome',
             headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
@@ -74,7 +74,8 @@ export const scrapeAajTak = asyncHandler(async (req, res, next) => {
         const scrapedData = []
 
         // console.log(`Waiting for selector: ${containerSelector}`);
-        await page.waitForSelector(containerSelector, { timeout: 5000 });
+        // await page.waitForSelector(containerSelector, { timeout: 5000 });
+        await page.waitForSelector(containerSelector);
 
         const articles = await page.$$(containerSelector);
 

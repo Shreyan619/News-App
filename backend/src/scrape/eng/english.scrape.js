@@ -11,7 +11,7 @@ import { englishArticle } from "../../models/english.model.js";
 export const scrapeEnglish = asyncHandler(async () => {
     try {
         const browser = await puppeteer.launch({
-            executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe',
+            // executablePath: 'C:/Users/LENOVO/.cache/puppeteer/chrome/win64-127.0.6533.88/chrome-win64/chrome.exe',
             headless: true,
             defaultViewport: null,
             cacheDir: '/opt/render/.cache/puppeteer',
@@ -63,7 +63,8 @@ export const scrapeEnglish = asyncHandler(async () => {
         const scrapedData = []
 
         // console.log(`Waiting for selector: ${containerSelector}`);
-        await page.waitForSelector(containerSelector, { timeout: 5000 });
+        // await page.waitForSelector(containerSelector, { timeout: 5000 });
+        await page.waitForSelector(containerSelector);
 
         const articles = await page.$$(containerSelector);
 

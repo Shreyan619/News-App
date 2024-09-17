@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import user from "./routes/user.routes.js";
+import test from "./routes/test.routes.js";
 import article from "../src/routes/article.routes.js"
 
 const app = express()
@@ -27,6 +28,7 @@ app.use(cookieParser())
 // routes declaration
 app.use("/api/v1", user)
 app.use("/api/v1", article)
+app.use("",test)
 
 
 export { app }
